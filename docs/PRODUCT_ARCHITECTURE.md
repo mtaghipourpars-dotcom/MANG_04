@@ -50,3 +50,17 @@ Compare expected and observed outcomes. Evaluate effectiveness (whether intended
 - newmodel1 provides an industrial PVPT domain context, especially projects/products, production structure, commitments, and time-phased shared-resource constraints.
 - MANG_01 provides input governance and data-layer rules.
 MANG_04 is the integration of the agreed conceptual baseline, not an assertion that source codebases have been merged.
+
+
+## 9. Canonical reconciliation update (2026-10-29)
+
+This document is the concise architecture baseline. For the fully reconciled cross-repository requirements, use [Unified Product Requirements](UNIFIED_PRODUCT_REQUIREMENTS.md) and [Unified Data & Architecture Contract](UNIFIED_DATA_AND_ARCHITECTURE_CONTRACT.md). If wording here is less specific than those contracts, the unified contracts govern.
+
+Key reconciliations now fixed:
+- MANG_03 is the generic decision-support core; PVPT is the industrial domain; MANG_01 contributes data governance and cockpit patterns.
+- MVP financial assessment starts with manager-owned qualitative parameters. Quantified finance is staged and evidence-gated.
+- Feasibility precedes profile ranking; INSUFFICIENT_EVIDENCE differs from NOT_FEASIBLE; no feasible option triggers escalation.
+- SETTING / INPUT / ANALYTICAL are separate from provenance and epistemic-status axes.
+- Time-phased resource analysis does not authorize autonomous schedule changes or ERP write-back.
+- The five executive cards and two distinct Home views in MANG_04 govern over older screen sketches.
+- PostgreSQL and self-hosted deployment are target architecture only until provisioning and tests are verified.
