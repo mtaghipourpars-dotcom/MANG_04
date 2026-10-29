@@ -48,7 +48,7 @@
       "ownerUserId": "usr-rezaei",
       "ownerName": "مهندس رضایی",
       "roleTitle": "مدیر ایستگاه آزمون",
-      "effectiveFrom": "2026-10-29T08:05:39.215Z"
+      "effectiveFrom": "2026-10-29T08:17:33.058Z"
     },
     {
       "id": "roh-02",
@@ -56,7 +56,7 @@
       "ownerUserId": "usr-ahmadi",
       "ownerName": "مهندس احمدی",
       "roleTitle": "سرپرست تولید استاتور",
-      "effectiveFrom": "2026-10-29T08:05:39.215Z"
+      "effectiveFrom": "2026-10-29T08:17:33.058Z"
     }
   ],
   "projects": [
@@ -79,8 +79,8 @@
       "dataLayer": "INPUT",
       "truthClass": "DEMO_SYNTHETIC",
       "version": 1,
-      "createdAt": "2026-10-29T08:05:39.215Z",
-      "updatedAt": "2026-10-29T08:05:39.215Z"
+      "createdAt": "2026-10-29T08:17:33.058Z",
+      "updatedAt": "2026-10-29T08:17:33.058Z"
     },
     {
       "id": "p-1398",
@@ -101,8 +101,8 @@
       "dataLayer": "INPUT",
       "truthClass": "DEMO_SYNTHETIC",
       "version": 1,
-      "createdAt": "2026-10-29T08:05:39.215Z",
-      "updatedAt": "2026-10-29T08:05:39.215Z"
+      "createdAt": "2026-10-29T08:17:33.058Z",
+      "updatedAt": "2026-10-29T08:17:33.058Z"
     },
     {
       "id": "p-1412",
@@ -123,8 +123,8 @@
       "dataLayer": "INPUT",
       "truthClass": "DEMO_SYNTHETIC",
       "version": 1,
-      "createdAt": "2026-10-29T08:05:39.215Z",
-      "updatedAt": "2026-10-29T08:05:39.215Z"
+      "createdAt": "2026-10-29T08:17:33.058Z",
+      "updatedAt": "2026-10-29T08:17:33.058Z"
     },
     {
       "id": "p-1395",
@@ -145,8 +145,8 @@
       "dataLayer": "INPUT",
       "truthClass": "DEMO_SYNTHETIC",
       "version": 1,
-      "createdAt": "2026-10-29T08:05:39.215Z",
-      "updatedAt": "2026-10-29T08:05:39.215Z"
+      "createdAt": "2026-10-29T08:17:33.058Z",
+      "updatedAt": "2026-10-29T08:17:33.058Z"
     },
     {
       "id": "p-1401",
@@ -167,8 +167,8 @@
       "dataLayer": "INPUT",
       "truthClass": "DEMO_SYNTHETIC",
       "version": 1,
-      "createdAt": "2026-10-29T08:05:39.215Z",
-      "updatedAt": "2026-10-29T08:05:39.215Z"
+      "createdAt": "2026-10-29T08:17:33.058Z",
+      "updatedAt": "2026-10-29T08:17:33.058Z"
     }
   ],
   "issueIntakes": [
@@ -181,11 +181,11 @@
       "originalNarrativeEn": "Bushing supplier notified delay due to logistics bottlenecks.",
       "reporterId": "usr-hosseini",
       "reporterName": "مهندس حسینی (زنجیره تأمین)",
-      "reportedAt": "2026-10-29T08:05:39.215Z",
+      "reportedAt": "2026-10-29T08:17:33.058Z",
       "truthClass": "DEMO_SYNTHETIC",
       "dataLayer": "INPUT",
       "isImmutable": true,
-      "createdAt": "2026-10-29T08:05:39.215Z"
+      "createdAt": "2026-10-29T08:17:33.058Z"
     },
     {
       "id": "intake-1398",
@@ -196,11 +196,11 @@
       "originalNarrativeEn": "Overlapping testing window for 250MW generator with 325MW generator at single test bench.",
       "reporterId": "usr-ahmadi",
       "reporterName": "مهندس احمدی (سرپرست تولید)",
-      "reportedAt": "2026-10-29T08:05:39.215Z",
+      "reportedAt": "2026-10-29T08:17:33.058Z",
       "truthClass": "DEMO_SYNTHETIC",
       "dataLayer": "INPUT",
       "isImmutable": true,
-      "createdAt": "2026-10-29T08:05:39.215Z"
+      "createdAt": "2026-10-29T08:17:33.058Z"
     }
   ],
   "issueCases": [
@@ -220,7 +220,7 @@
       "currentStage": "HUMAN_DECISION_FROZEN",
       "qualificationStatus": "QUALIFIED",
       "deadlineDays": 5,
-      "deadlineDate": "2026-11-03T08:05:39.216Z",
+      "deadlineDate": "2026-11-03T08:17:33.058Z",
       "caseFeasibilityState": "FEASIBLE",
       "impactsFa": [
         "تأثیر بر آزمون نهایی",
@@ -247,9 +247,9 @@
         "Procurement"
       ],
       "imageUrl": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80",
-      "version": 4,
-      "createdAt": "2026-10-29T08:05:39.215Z",
-      "updatedAt": "2026-10-29T08:07:07.741Z"
+      "version": 2,
+      "createdAt": "2026-10-29T08:17:33.058Z",
+      "updatedAt": "2026-10-29T08:18:41.150Z"
     },
     {
       "id": "case-1398",
@@ -264,10 +264,10 @@
       "descriptionEn": "Impact on delivery for two customers / Penalty risk / Cash flow pressure / Priority conflict",
       "keyResourceId": "kr-test-bench",
       "responsibleOwnerId": "usr-ahmadi",
-      "currentStage": "FEASIBILITY_EVALUATED",
+      "currentStage": "HUMAN_DECISION_FROZEN",
       "qualificationStatus": "QUALIFIED",
       "deadlineDays": 12,
-      "deadlineDate": "2026-11-10T08:05:39.216Z",
+      "deadlineDate": "2026-11-10T08:17:33.058Z",
       "caseFeasibilityState": "FEASIBLE",
       "impactsFa": [
         "تأثیر بر تحویل دو مشتری",
@@ -294,9 +294,9 @@
         "Customer"
       ],
       "imageUrl": "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80",
-      "version": 1,
-      "createdAt": "2026-10-29T08:05:39.215Z",
-      "updatedAt": "2026-10-29T08:05:39.215Z"
+      "version": 2,
+      "createdAt": "2026-10-29T08:17:33.058Z",
+      "updatedAt": "2026-10-29T08:18:41.307Z"
     }
   ],
   "solutionCandidates": [
@@ -329,8 +329,8 @@
       "proposerId": "usr-rezaei",
       "proposerName": "مهندس رضایی",
       "version": 1,
-      "createdAt": "2026-10-29T08:05:39.215Z",
-      "updatedAt": "2026-10-29T08:05:39.215Z"
+      "createdAt": "2026-10-29T08:17:33.058Z",
+      "updatedAt": "2026-10-29T08:17:33.058Z"
     },
     {
       "id": "cand-1405-2",
@@ -363,8 +363,8 @@
       "proposerId": "usr-ahmadi",
       "proposerName": "مهندس احمدی",
       "version": 1,
-      "createdAt": "2026-10-29T08:05:39.215Z",
-      "updatedAt": "2026-10-29T08:05:39.215Z"
+      "createdAt": "2026-10-29T08:17:33.058Z",
+      "updatedAt": "2026-10-29T08:17:33.058Z"
     },
     {
       "id": "cand-1398-1",
@@ -397,8 +397,8 @@
       "proposerId": "usr-ahmadi",
       "proposerName": "مهندس احمدی",
       "version": 1,
-      "createdAt": "2026-10-29T08:05:39.215Z",
-      "updatedAt": "2026-10-29T08:05:39.215Z"
+      "createdAt": "2026-10-29T08:17:33.058Z",
+      "updatedAt": "2026-10-29T08:17:33.058Z"
     },
     {
       "id": "cand-1398-2",
@@ -427,8 +427,8 @@
       "proposerId": "usr-karimi",
       "proposerName": "مهندس کریمی",
       "version": 1,
-      "createdAt": "2026-10-29T08:05:39.215Z",
-      "updatedAt": "2026-10-29T08:05:39.215Z"
+      "createdAt": "2026-10-29T08:17:33.058Z",
+      "updatedAt": "2026-10-29T08:17:33.058Z"
     }
   ],
   "feasibilityRuns": [
@@ -436,7 +436,7 @@
       "id": "feas-1405-1",
       "candidateId": "cand-1405-1",
       "engineVersion": "1.0.0",
-      "runTimestamp": "2026-10-29T08:05:39.215Z",
+      "runTimestamp": "2026-10-29T08:17:33.058Z",
       "overallResult": "FEASIBLE",
       "materialConstraint": "PASSED",
       "machineConstraint": "PASSED",
@@ -450,7 +450,7 @@
       "id": "feas-1405-2",
       "candidateId": "cand-1405-2",
       "engineVersion": "1.0.0",
-      "runTimestamp": "2026-10-29T08:05:39.215Z",
+      "runTimestamp": "2026-10-29T08:17:33.058Z",
       "overallResult": "PARTIALLY_FEASIBLE",
       "materialConstraint": "PASSED",
       "machineConstraint": "PASSED",
@@ -472,76 +472,57 @@
       "liquidityWeight": 5,
       "strategicWeight": 4,
       "feasibilityGateMandatory": true,
-      "createdAt": "2026-10-29T08:05:39.215Z"
+      "createdAt": "2026-10-29T08:17:33.058Z"
     }
   ],
   "humanDecisions": [
     {
-      "id": "dec-1793261227741-emwt",
-      "issueCaseId": "case-1405",
-      "selectedCandidateId": "cand-1405-1",
+      "id": "dec-1793261921306-5zjb",
+      "issueCaseId": "case-1398",
+      "selectedCandidateId": "cand-1398-1",
       "decisionMakerId": "usr-ceo",
       "decisionMakerRole": "مدیرعامل / CEO",
-      "authorityBasis": "مصوبه هیئت مدیره مپنا پارس ۱۴۰۳",
-      "decisionRationale": "انتخاب راهکار حمل هوایی فورس‌ماژور برای جلوگیری از جریمه قراردادی و حفظ نقدینگی پروژه",
+      "authorityBasis": "مصوبه هیئت مدیره",
+      "decisionRationale": "Consistency test rationale documentation for defensible decision recording",
       "rejectedCandidatesSnapshot": [
         {
-          "id": "cand-1405-2",
-          "issueCaseId": "case-1405",
+          "id": "cand-1398-2",
+          "issueCaseId": "case-1398",
           "candidateNumber": 2,
-          "titleFa": "مونتاژ موقت با قطعه جایگزین داخلی + آزمون مقدماتی",
-          "titleEn": "Temporary Assembly with Domestic Component + Pre-test",
-          "descriptionFa": "استفاده از قطعه موجود در انبار پروژه P-1398 و بازگرداندن آن پس از وصول پارت اصلی",
-          "descriptionEn": "Borrow component from P-1398 warehouse and replace upon arrival",
-          "costImpactM": 45,
-          "scheduleImpactDays": 8,
+          "titleFa": "مرحله‌بندی آزمون (تحویل فاز ۱ + تکمیل فاز ۲)",
+          "titleEn": "Phased Testing (Phase 1 Delivery + Phase 2 On-site)",
+          "descriptionFa": "انجام آزمون‌های سرد در کارخانه و آزمون گرم در سایت مشتری",
+          "descriptionEn": "Conduct cold testing in factory and hot testing at customer site",
+          "costImpactM": 120,
+          "scheduleImpactDays": 5,
           "feasibilityStatus": "PARTIALLY_FEASIBLE",
           "isEligibleForRanking": true,
           "prosFa": [
-            "هزینه پرداختی پایین‌تر",
-            "عدم نیاز به ارز صادراتی"
+            "کاهش بار ترافیکی کارخانه"
           ],
           "prosEn": [
-            "Lower cash outlay",
-            "No foreign currency required"
+            "Reduces factory bench traffic"
           ],
           "consFa": [
-            "ریسک تأخیر ۸ روزه در پروژه P-1398",
-            "نیازمند تأییدیه فنی رسمی"
+            "نیازمند متمم مکتوب قرارداد با مشتری"
           ],
           "consEn": [
-            "8-day delay risk for project P-1398",
-            "Requires formal technical sign-off"
+            "Requires written contract amendment with customer"
           ],
-          "proposerId": "usr-ahmadi",
-          "proposerName": "مهندس احمدی",
+          "proposerId": "usr-karimi",
+          "proposerName": "مهندس کریمی",
           "version": 1,
-          "createdAt": "2026-10-29T08:05:39.215Z",
-          "updatedAt": "2026-10-29T08:05:39.215Z"
+          "createdAt": "2026-10-29T08:17:33.058Z",
+          "updatedAt": "2026-10-29T08:17:33.058Z"
         }
       ],
       "profileVersionId": "prof-v1",
-      "feasibilitySnapshot": [
-        {
-          "id": "feas-1405-1",
-          "candidateId": "cand-1405-1",
-          "engineVersion": "1.0.0",
-          "runTimestamp": "2026-10-29T08:05:39.215Z",
-          "overallResult": "FEASIBLE",
-          "materialConstraint": "PASSED",
-          "machineConstraint": "PASSED",
-          "manpowerConstraint": "PASSED",
-          "technicalSafetyConstraint": "PASSED",
-          "liquidityConstraint": "PASSED",
-          "findingsSummary": "تمام شروط پنج‌گانه سخت پاس گردید. ظرفیت جایگزین در پنجره آخر هفته تایید شد.",
-          "evaluatedBy": "موتور ارزیابی امکان‌سنجی MANG_04"
-        }
-      ],
+      "feasibilitySnapshot": [],
       "isFrozen": true,
-      "decidedAt": "2026-10-29T08:07:07.741Z"
+      "decidedAt": "2026-10-29T08:18:41.307Z"
     },
     {
-      "id": "dec-1793261154961-kdlk",
+      "id": "dec-1793261921149-fc3y",
       "issueCaseId": "case-1405",
       "selectedCandidateId": "cand-1405-1",
       "decisionMakerId": "usr-ceo",
@@ -580,8 +561,8 @@
           "proposerId": "usr-ahmadi",
           "proposerName": "مهندس احمدی",
           "version": 1,
-          "createdAt": "2026-10-29T08:05:39.215Z",
-          "updatedAt": "2026-10-29T08:05:39.215Z"
+          "createdAt": "2026-10-29T08:17:33.058Z",
+          "updatedAt": "2026-10-29T08:17:33.058Z"
         }
       ],
       "profileVersionId": "prof-v1",
@@ -590,7 +571,7 @@
           "id": "feas-1405-1",
           "candidateId": "cand-1405-1",
           "engineVersion": "1.0.0",
-          "runTimestamp": "2026-10-29T08:05:39.215Z",
+          "runTimestamp": "2026-10-29T08:17:33.058Z",
           "overallResult": "FEASIBLE",
           "materialConstraint": "PASSED",
           "machineConstraint": "PASSED",
@@ -602,78 +583,14 @@
         }
       ],
       "isFrozen": true,
-      "decidedAt": "2026-10-29T08:05:54.961Z"
-    },
-    {
-      "id": "dec-1793261139244-m4ia",
-      "issueCaseId": "case-1405",
-      "selectedCandidateId": "cand-1405-1",
-      "decisionMakerId": "usr-ceo",
-      "decisionMakerRole": "مدیرعامل / CEO",
-      "authorityBasis": "مصوبه هیئت مدیره مپنا پارس ۱۴۰۳",
-      "decisionRationale": "انتخاب راهکار حمل هوایی فورس‌ماژور برای جلوگیری از جریمه قراردادی و حفظ نقدینگی پروژه",
-      "rejectedCandidatesSnapshot": [
-        {
-          "id": "cand-1405-2",
-          "issueCaseId": "case-1405",
-          "candidateNumber": 2,
-          "titleFa": "مونتاژ موقت با قطعه جایگزین داخلی + آزمون مقدماتی",
-          "titleEn": "Temporary Assembly with Domestic Component + Pre-test",
-          "descriptionFa": "استفاده از قطعه موجود در انبار پروژه P-1398 و بازگرداندن آن پس از وصول پارت اصلی",
-          "descriptionEn": "Borrow component from P-1398 warehouse and replace upon arrival",
-          "costImpactM": 45,
-          "scheduleImpactDays": 8,
-          "feasibilityStatus": "PARTIALLY_FEASIBLE",
-          "isEligibleForRanking": true,
-          "prosFa": [
-            "هزینه پرداختی پایین‌تر",
-            "عدم نیاز به ارز صادراتی"
-          ],
-          "prosEn": [
-            "Lower cash outlay",
-            "No foreign currency required"
-          ],
-          "consFa": [
-            "ریسک تأخیر ۸ روزه در پروژه P-1398",
-            "نیازمند تأییدیه فنی رسمی"
-          ],
-          "consEn": [
-            "8-day delay risk for project P-1398",
-            "Requires formal technical sign-off"
-          ],
-          "proposerId": "usr-ahmadi",
-          "proposerName": "مهندس احمدی",
-          "version": 1,
-          "createdAt": "2026-10-29T08:05:39.215Z",
-          "updatedAt": "2026-10-29T08:05:39.215Z"
-        }
-      ],
-      "profileVersionId": "prof-v1",
-      "feasibilitySnapshot": [
-        {
-          "id": "feas-1405-1",
-          "candidateId": "cand-1405-1",
-          "engineVersion": "1.0.0",
-          "runTimestamp": "2026-10-29T08:05:39.215Z",
-          "overallResult": "FEASIBLE",
-          "materialConstraint": "PASSED",
-          "machineConstraint": "PASSED",
-          "manpowerConstraint": "PASSED",
-          "technicalSafetyConstraint": "PASSED",
-          "liquidityConstraint": "PASSED",
-          "findingsSummary": "تمام شروط پنج‌گانه سخت پاس گردید. ظرفیت جایگزین در پنجره آخر هفته تایید شد.",
-          "evaluatedBy": "موتور ارزیابی امکان‌سنجی MANG_04"
-        }
-      ],
-      "isFrozen": true,
-      "decidedAt": "2026-10-29T08:05:39.244Z"
+      "decidedAt": "2026-10-29T08:18:41.149Z"
     }
   ],
   "tripartiteEvidence": [
     {
       "id": "tri-01",
       "projectId": "p-1405",
-      "observationTimestamp": "2026-10-29T08:05:39.215Z",
+      "observationTimestamp": "2026-10-29T08:17:33.058Z",
       "claimedPercentage": 68,
       "warehouseDocNumber": "WH-DOC-89421",
       "warehouseVerified": true,
@@ -684,30 +601,85 @@
       "supervisorSignoffVerified": false,
       "verificationStatus": "UNVERIFIED",
       "verificationNotes": "امضای سرپرست کنترل کیفیت در انتظار تکمیل آزمون نهایی است. پیشرفت به عنوان راستی‌آزمایی‌شده قطعی پذیرفته نشد.",
-      "createdAt": "2026-10-29T08:05:39.215Z"
+      "createdAt": "2026-10-29T08:17:33.058Z"
     }
   ],
   "auditEvents": [
     {
-      "id": "audit-1793261227774-eusa9",
-      "timestamp": "2026-10-29T08:07:07.774Z",
+      "id": "audit-1793261921406-4echc",
+      "timestamp": "2026-10-29T08:18:41.406Z",
       "action": "TEST_PERSISTENCE_EVENT",
       "entityType": "INTEGRITY_TEST",
-      "entityId": "audit-persist-1793261227774",
+      "entityId": "audit-persist-1793261921406",
       "actorId": "usr-test",
       "actorRole": "TEST_RUNNER",
       "rationale": "Verifying physical file write to disk"
     },
     {
-      "id": "audit-1793261227752-3of7k",
-      "timestamp": "2026-10-29T08:07:07.752Z",
+      "id": "audit-1793261921320-x47j3",
+      "timestamp": "2026-10-29T08:18:41.320Z",
       "action": "HUMAN_DECISION_FROZEN",
       "entityType": "HUMAN_DECISION",
-      "entityId": "dec-1793261227741-emwt",
+      "entityId": "dec-1793261921306-5zjb",
       "actorId": "usr-ceo",
       "actorRole": "مدیرعامل / CEO",
       "afterState": {
-        "id": "dec-1793261227741-emwt",
+        "id": "dec-1793261921306-5zjb",
+        "issueCaseId": "case-1398",
+        "selectedCandidateId": "cand-1398-1",
+        "decisionMakerId": "usr-ceo",
+        "decisionMakerRole": "مدیرعامل / CEO",
+        "authorityBasis": "مصوبه هیئت مدیره",
+        "decisionRationale": "Consistency test rationale documentation for defensible decision recording",
+        "rejectedCandidatesSnapshot": [
+          {
+            "id": "cand-1398-2",
+            "issueCaseId": "case-1398",
+            "candidateNumber": 2,
+            "titleFa": "مرحله‌بندی آزمون (تحویل فاز ۱ + تکمیل فاز ۲)",
+            "titleEn": "Phased Testing (Phase 1 Delivery + Phase 2 On-site)",
+            "descriptionFa": "انجام آزمون‌های سرد در کارخانه و آزمون گرم در سایت مشتری",
+            "descriptionEn": "Conduct cold testing in factory and hot testing at customer site",
+            "costImpactM": 120,
+            "scheduleImpactDays": 5,
+            "feasibilityStatus": "PARTIALLY_FEASIBLE",
+            "isEligibleForRanking": true,
+            "prosFa": [
+              "کاهش بار ترافیکی کارخانه"
+            ],
+            "prosEn": [
+              "Reduces factory bench traffic"
+            ],
+            "consFa": [
+              "نیازمند متمم مکتوب قرارداد با مشتری"
+            ],
+            "consEn": [
+              "Requires written contract amendment with customer"
+            ],
+            "proposerId": "usr-karimi",
+            "proposerName": "مهندس کریمی",
+            "version": 1,
+            "createdAt": "2026-10-29T08:17:33.058Z",
+            "updatedAt": "2026-10-29T08:17:33.058Z"
+          }
+        ],
+        "profileVersionId": "prof-v1",
+        "feasibilitySnapshot": [],
+        "isFrozen": true,
+        "decidedAt": "2026-10-29T08:18:41.307Z"
+      },
+      "rationale": "Human Decision frozen under authority مصوبه هیئت مدیره. Selected: cand-1398-1"
+    },
+    {
+      "id": "audit-1793261921162-06m9x",
+      "timestamp": "2026-10-29T08:18:41.162Z",
+      "action": "HUMAN_DECISION_FROZEN",
+      "entityType": "HUMAN_DECISION",
+      "entityId": "dec-1793261921149-fc3y",
+      "actorId": "usr-ceo",
+      "actorRole": "مدیرعامل / CEO",
+      "afterState": {
+        "id": "dec-1793261921149-fc3y",
         "issueCaseId": "case-1405",
         "selectedCandidateId": "cand-1405-1",
         "decisionMakerId": "usr-ceo",
@@ -746,8 +718,8 @@
             "proposerId": "usr-ahmadi",
             "proposerName": "مهندس احمدی",
             "version": 1,
-            "createdAt": "2026-10-29T08:05:39.215Z",
-            "updatedAt": "2026-10-29T08:05:39.215Z"
+            "createdAt": "2026-10-29T08:17:33.058Z",
+            "updatedAt": "2026-10-29T08:17:33.058Z"
           }
         ],
         "profileVersionId": "prof-v1",
@@ -756,7 +728,7 @@
             "id": "feas-1405-1",
             "candidateId": "cand-1405-1",
             "engineVersion": "1.0.0",
-            "runTimestamp": "2026-10-29T08:05:39.215Z",
+            "runTimestamp": "2026-10-29T08:17:33.058Z",
             "overallResult": "FEASIBLE",
             "materialConstraint": "PASSED",
             "machineConstraint": "PASSED",
@@ -768,167 +740,19 @@
           }
         ],
         "isFrozen": true,
-        "decidedAt": "2026-10-29T08:07:07.741Z"
+        "decidedAt": "2026-10-29T08:18:41.149Z"
       },
       "rationale": "Human Decision frozen under authority مصوبه هیئت مدیره مپنا پارس ۱۴۰۳. Selected: cand-1405-1"
     },
     {
-      "id": "audit-1793261155144-8avk8",
-      "timestamp": "2026-10-29T08:05:55.144Z",
-      "action": "TEST_PERSISTENCE_EVENT",
-      "entityType": "INTEGRITY_TEST",
-      "entityId": "audit-persist-1793261155144",
-      "actorId": "usr-test",
-      "actorRole": "TEST_RUNNER",
-      "rationale": "Verifying physical file write to disk"
-    },
-    {
-      "id": "audit-1793261154993-z0aoh",
-      "timestamp": "2026-10-29T08:05:54.993Z",
-      "action": "HUMAN_DECISION_FROZEN",
-      "entityType": "HUMAN_DECISION",
-      "entityId": "dec-1793261154961-kdlk",
-      "actorId": "usr-ceo",
-      "actorRole": "مدیرعامل / CEO",
-      "afterState": {
-        "id": "dec-1793261154961-kdlk",
-        "issueCaseId": "case-1405",
-        "selectedCandidateId": "cand-1405-1",
-        "decisionMakerId": "usr-ceo",
-        "decisionMakerRole": "مدیرعامل / CEO",
-        "authorityBasis": "مصوبه هیئت مدیره مپنا پارس ۱۴۰۳",
-        "decisionRationale": "انتخاب راهکار حمل هوایی فورس‌ماژور برای جلوگیری از جریمه قراردادی و حفظ نقدینگی پروژه",
-        "rejectedCandidatesSnapshot": [
-          {
-            "id": "cand-1405-2",
-            "issueCaseId": "case-1405",
-            "candidateNumber": 2,
-            "titleFa": "مونتاژ موقت با قطعه جایگزین داخلی + آزمون مقدماتی",
-            "titleEn": "Temporary Assembly with Domestic Component + Pre-test",
-            "descriptionFa": "استفاده از قطعه موجود در انبار پروژه P-1398 و بازگرداندن آن پس از وصول پارت اصلی",
-            "descriptionEn": "Borrow component from P-1398 warehouse and replace upon arrival",
-            "costImpactM": 45,
-            "scheduleImpactDays": 8,
-            "feasibilityStatus": "PARTIALLY_FEASIBLE",
-            "isEligibleForRanking": true,
-            "prosFa": [
-              "هزینه پرداختی پایین‌تر",
-              "عدم نیاز به ارز صادراتی"
-            ],
-            "prosEn": [
-              "Lower cash outlay",
-              "No foreign currency required"
-            ],
-            "consFa": [
-              "ریسک تأخیر ۸ روزه در پروژه P-1398",
-              "نیازمند تأییدیه فنی رسمی"
-            ],
-            "consEn": [
-              "8-day delay risk for project P-1398",
-              "Requires formal technical sign-off"
-            ],
-            "proposerId": "usr-ahmadi",
-            "proposerName": "مهندس احمدی",
-            "version": 1,
-            "createdAt": "2026-10-29T08:05:39.215Z",
-            "updatedAt": "2026-10-29T08:05:39.215Z"
-          }
-        ],
-        "profileVersionId": "prof-v1",
-        "feasibilitySnapshot": [
-          {
-            "id": "feas-1405-1",
-            "candidateId": "cand-1405-1",
-            "engineVersion": "1.0.0",
-            "runTimestamp": "2026-10-29T08:05:39.215Z",
-            "overallResult": "FEASIBLE",
-            "materialConstraint": "PASSED",
-            "machineConstraint": "PASSED",
-            "manpowerConstraint": "PASSED",
-            "technicalSafetyConstraint": "PASSED",
-            "liquidityConstraint": "PASSED",
-            "findingsSummary": "تمام شروط پنج‌گانه سخت پاس گردید. ظرفیت جایگزین در پنجره آخر هفته تایید شد.",
-            "evaluatedBy": "موتور ارزیابی امکان‌سنجی MANG_04"
-          }
-        ],
-        "isFrozen": true,
-        "decidedAt": "2026-10-29T08:05:54.961Z"
-      },
-      "rationale": "Human Decision frozen under authority مصوبه هیئت مدیره مپنا پارس ۱۴۰۳. Selected: cand-1405-1"
-    },
-    {
-      "id": "audit-1793261139265-r1pw3",
-      "timestamp": "2026-10-29T08:05:39.265Z",
-      "action": "HUMAN_DECISION_FROZEN",
-      "entityType": "HUMAN_DECISION",
-      "entityId": "dec-1793261139244-m4ia",
-      "actorId": "usr-ceo",
-      "actorRole": "مدیرعامل / CEO",
-      "afterState": {
-        "id": "dec-1793261139244-m4ia",
-        "issueCaseId": "case-1405",
-        "selectedCandidateId": "cand-1405-1",
-        "decisionMakerId": "usr-ceo",
-        "decisionMakerRole": "مدیرعامل / CEO",
-        "authorityBasis": "مصوبه هیئت مدیره مپنا پارس ۱۴۰۳",
-        "decisionRationale": "انتخاب راهکار حمل هوایی فورس‌ماژور برای جلوگیری از جریمه قراردادی و حفظ نقدینگی پروژه",
-        "rejectedCandidatesSnapshot": [
-          {
-            "id": "cand-1405-2",
-            "issueCaseId": "case-1405",
-            "candidateNumber": 2,
-            "titleFa": "مونتاژ موقت با قطعه جایگزین داخلی + آزمون مقدماتی",
-            "titleEn": "Temporary Assembly with Domestic Component + Pre-test",
-            "descriptionFa": "استفاده از قطعه موجود در انبار پروژه P-1398 و بازگرداندن آن پس از وصول پارت اصلی",
-            "descriptionEn": "Borrow component from P-1398 warehouse and replace upon arrival",
-            "costImpactM": 45,
-            "scheduleImpactDays": 8,
-            "feasibilityStatus": "PARTIALLY_FEASIBLE",
-            "isEligibleForRanking": true,
-            "prosFa": [
-              "هزینه پرداختی پایین‌تر",
-              "عدم نیاز به ارز صادراتی"
-            ],
-            "prosEn": [
-              "Lower cash outlay",
-              "No foreign currency required"
-            ],
-            "consFa": [
-              "ریسک تأخیر ۸ روزه در پروژه P-1398",
-              "نیازمند تأییدیه فنی رسمی"
-            ],
-            "consEn": [
-              "8-day delay risk for project P-1398",
-              "Requires formal technical sign-off"
-            ],
-            "proposerId": "usr-ahmadi",
-            "proposerName": "مهندس احمدی",
-            "version": 1,
-            "createdAt": "2026-10-29T08:05:39.215Z",
-            "updatedAt": "2026-10-29T08:05:39.215Z"
-          }
-        ],
-        "profileVersionId": "prof-v1",
-        "feasibilitySnapshot": [
-          {
-            "id": "feas-1405-1",
-            "candidateId": "cand-1405-1",
-            "engineVersion": "1.0.0",
-            "runTimestamp": "2026-10-29T08:05:39.215Z",
-            "overallResult": "FEASIBLE",
-            "materialConstraint": "PASSED",
-            "machineConstraint": "PASSED",
-            "manpowerConstraint": "PASSED",
-            "technicalSafetyConstraint": "PASSED",
-            "liquidityConstraint": "PASSED",
-            "findingsSummary": "تمام شروط پنج‌گانه سخت پاس گردید. ظرفیت جایگزین در پنجره آخر هفته تایید شد.",
-            "evaluatedBy": "موتور ارزیابی امکان‌سنجی MANG_04"
-          }
-        ],
-        "isFrozen": true,
-        "decidedAt": "2026-10-29T08:05:39.244Z"
-      },
-      "rationale": "Human Decision frozen under authority مصوبه هیئت مدیره مپنا پارس ۱۴۰۳. Selected: cand-1405-1"
+      "id": "audit-1793261853061-ncu0p",
+      "timestamp": "2026-10-29T08:17:33.061Z",
+      "action": "DATABASE_RESET_DEMO_SYNTHETIC",
+      "entityType": "DATABASE",
+      "entityId": "ROOT",
+      "actorId": "usr-ceo-01",
+      "actorRole": "مدیرعامل / Chief Executive Officer",
+      "rationale": "بازنشانی کنترل‌شده پایگاه داده به وضعیت نمونه DEMO_SYNTHETIC"
     },
     {
       "id": "audit-init-01",
@@ -938,7 +762,7 @@
       "actorId": "SYSTEM",
       "actorRole": "INITIALIZER",
       "rationale": "بوت اولیه سیستم و بارگذاری اطلاعات مبنا بر اساس مدل استاندارد MANG_04",
-      "timestamp": "2026-10-29T08:05:39.215Z"
+      "timestamp": "2026-10-29T08:17:33.058Z"
     }
   ]
 }

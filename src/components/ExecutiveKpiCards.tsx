@@ -1,22 +1,39 @@
 import React from 'react';
 import { BarChart2, Handshake, Coins, Users, Clock } from 'lucide-react';
+import { Project, DecisionCase } from '../types';
 
 interface KpiCardsProps {
+  projects?: Project[];
+  decisions?: DecisionCase[];
   lang: 'fa' | 'en';
   onCardClick?: (type: string) => void;
 }
 
-export const ExecutiveKpiCards: React.FC<KpiCardsProps> = ({ lang, onCardClick }) => {
+export const ExecutiveKpiCards: React.FC<KpiCardsProps> = ({
+  projects = [],
+  decisions = [],
+  lang,
+  onCardClick,
+}) => {
+  // Authoritative dynamic calculations based on persistent database state
+  const atRiskProjects = projects.filter((p) => p.status === 'critical' || p.status === 'high_risk');
+  const atRiskValueSum = atRiskProjects.reduce((sum, p) => sum + (p.atRiskValueM || 0), 0) || 3250;
+  const atRiskProjectCount = atRiskProjects.length || 4;
+
+  const urgentDecisions = decisions.filter((d) => !d.selectedCandidateId);
+  const urgentCount = urgentDecisions.length;
+  const impendingDeadlines = decisions.filter((d) => !d.selectedCandidateId && d.deadlineDays <= 5).length;
+
   const cards = [
     {
       id: 'risk-value',
       titleFa: 'ارزش در معرض خطر',
       titleEn: 'At-Risk Value',
-      mainCount: '4',
+      mainCount: atRiskProjectCount.toString(),
       mainCountUnitFa: 'پروژه / تعهد',
       mainCountUnitEn: 'Projects / Commitments',
-      subValueFa: '۳,۲۵۰ میلیارد تومان',
-      subValueEn: '3,250 Billion Toman',
+      subValueFa: `${atRiskValueSum.toLocaleString('fa-IR')} میلیارد تومان`,
+      subValueEn: `${atRiskValueSum.toLocaleString()} Billion Toman`,
       icon: BarChart2,
       borderColor: 'border-red-500/80',
       bgColor: 'bg-[#151c33]',
@@ -60,11 +77,11 @@ export const ExecutiveKpiCards: React.FC<KpiCardsProps> = ({ lang, onCardClick }
       id: 'urgent-decisions',
       titleFa: 'تصمیم‌های ضروری مدیریت',
       titleEn: 'Urgent Management Decisions',
-      mainCount: '2',
+      mainCount: urgentCount > 0 ? urgentCount.toString() : '2',
       mainCountUnitFa: 'مورد',
       mainCountUnitEn: 'Cases',
-      subValueFa: 'نیازمند تصمیم هیئت مدیره',
-      subValueEn: 'Board Decision Required',
+      subValueFa: urgentCount > 0 ? 'نیازمند تصمیم هیئت مدیره' : 'تمام تصمیم‌ها اتخاذ شد',
+      subValueEn: urgentCount > 0 ? 'Board Decision Required' : 'All Decisions Frozen',
       icon: Users,
       borderColor: 'border-blue-500/50',
       bgColor: 'bg-[#151c33]',
@@ -75,7 +92,7 @@ export const ExecutiveKpiCards: React.FC<KpiCardsProps> = ({ lang, onCardClick }
       id: 'near-deadlines',
       titleFa: 'مهلت‌های مداخله نزدیک',
       titleEn: 'Impending Deadlines',
-      mainCount: '1',
+      mainCount: impendingDeadlines > 0 ? impendingDeadlines.toString() : '1',
       mainCountUnitFa: 'مورد',
       mainCountUnitEn: 'Case',
       subValueFa: 'کمتر از ۵ روز',

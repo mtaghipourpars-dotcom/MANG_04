@@ -209,6 +209,8 @@ export default function App() {
         <main className="flex-1 p-4 md:p-6 overflow-y-auto max-w-[1600px] mx-auto w-full">
           {/* Executive KPI Cards */}
           <ExecutiveKpiCards
+            projects={projects}
+            decisions={decisions}
             lang={lang}
             onCardClick={(type) => {
               if (type === 'urgent-decisions' || type === 'near-deadlines') {

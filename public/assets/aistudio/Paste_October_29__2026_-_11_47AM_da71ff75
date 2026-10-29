@@ -1,0 +1,1043 @@
+# MANG_04 — CORRECTIVE ACTION PROMPT
+## Zero-Trust Enterprise Decision-Control System
+## Execution Environment: Google AI Studio
+
+ROLE
+Act as Principal Software Architect, Full-Stack Engineer, Database Architect, Security Engineer, and QA Lead for the existing MANG_04 repository.
+
+Repository:
+https://github.com/mtaghipourpars-dotcom/MANG_04
+
+Reference Home screen:
+https://github.com/mtaghipourpars-dotcom/MANG_04/blob/main/src/main.png
+
+MISSION
+Inspect, correct, implement, and validate the existing application against the mandatory requirements below. Modify the actual project files wherever your connected tools and execution environment permit.
+
+Do not return only a plan, mockup, conceptual design, or sample implementation. Execute the work, run available checks, and report actual results.
+
+Do not claim that repository files were changed, code was committed, a database was provisioned, or deployment succeeded unless the relevant operation was actually performed and verified.
+
+==================================================
+1. INSPECT THE EXISTING PROJECT FIRST
+==================================================
+
+Inspect the complete repository before making changes.
+
+At minimum, inspect:
+- src/main.png
+- src/App.tsx
+- src/main.tsx
+- src/types.ts
+- src/data.ts
+- server.ts
+- All other frontend components, dialogs, forms, and navigation
+- All API routes and API clients
+- Database and persistence code
+- Authentication and authorization code
+- package.json and lockfiles
+- Configuration and environment files
+- Tests and build scripts
+- README.md
+- docs/GOOGLE_AI_STUDIO_BUILD_SPEC.md
+- docs/GOOGLE_AI_STUDIO_IMPLEMENTATION_PROMPT.md
+- All other product, architecture, schema, and requirements documents
+
+Discover actual files before assuming their existence. Preserve useful existing implementations and naming conventions.
+
+Search for:
+- In-memory business records
+- Hardcoded initial business data used as authoritative runtime state
+- Fake API responses
+- Local fallback mutations after failed requests
+- Unpersisted issue, solution, profile, decision, and progress changes
+- Client-side-only authorization
+- Client-supplied decision-maker identities
+- Missing transactions and concurrency controls
+- Destructive initialization or reset operations
+- Inconsistent Home-screen and detail-page calculations
+- Unlocalized UI text
+- Unsupported claims of verified progress
+- Missing audit history
+- Undocumented business assumptions
+
+Create a baseline audit before changing the application.
+
+Classify every finding as:
+CONFIRMED REQUIREMENT
+IMPLEMENTATION DEFECT
+TECHNICAL IMPLEMENTATION
+OPEN BUSINESS DECISION
+NOT VERIFIED
+
+Never silently convert an assumption into an approved business rule.
+
+==================================================
+2. PRODUCT PRINCIPLES
+==================================================
+
+MANG_04 is an enterprise resource and decision-control system.
+
+It is not merely a dashboard, ERP replacement, project tracker, or autonomous decision-making AI.
+
+Its purpose is to establish a traceable process:
+
+KEY RESOURCE
+→ ISSUE INTAKE
+→ QUALIFICATION
+→ ISSUE CASE
+→ SOLUTION CANDIDATES
+→ EVIDENCE AND ASSESSMENT
+→ FEASIBILITY
+→ PROFILE COMPARISON
+→ HUMAN DECISION
+→ AUTHORIZED ACTIONS
+→ OBSERVED OUTCOME
+→ REVIEW AND LEARNING
+
+Map this conceptual lifecycle to the existing approved terminology. Do not invent mandatory stages or approval rules that are not documented.
+
+Core principles:
+
+1. Issues are registered for organizational KEY RESOURCES, not indiscriminately for every event.
+2. Each active issue requiring accountability must have exactly one accountable owner.
+3. Key resources may span departments, projects, production, engineering, finance, supply chain, and other organizational processes.
+4. An issue may be handled locally or escalated when the responsible team lacks the authority or capability to resolve it.
+5. Authority, scope, confidentiality, qualification, urgency, priority, and feasibility are separate concepts.
+6. The original issue intake must remain traceable as additional information is supplied.
+7. Evidence, uncertainty, contradictions, and data freshness must be represented honestly.
+8. Mandatory feasibility constraints precede comparative solution ranking.
+9. A failed or unknown mandatory constraint must never be silently treated as passed.
+10. The system presents alternatives and their consequences. Authorized human decision-makers remain accountable.
+11. Choosing one solution does not erase rejected alternatives.
+12. A selected solution is context-dependent. Historical success is evidence for future consideration, not a universal rule.
+13. Historical decisions must not be retroactively rewritten when parameters change.
+14. The system must assess observed outcomes and may propose improvements based on evidence.
+15. AI recommendations must remain distinguishable from verified facts and actual human decisions.
+
+The principal value proposition is structured, defensible resource allocation and improved visibility into organizational commitments, cash flow, operational bottlenecks, and the consequences of delayed intervention.
+
+The system must not claim that every decision will be correct or every project will finish on time.
+
+==================================================
+3. P0 — DATABASE-ONLY BUSINESS PERSISTENCE
+==================================================
+
+Inspect the existing database architecture and correct all confirmed persistence defects.
+
+All authoritative master data and runtime business state must be stored durably in the project database.
+
+This includes, where applicable:
+- Key resources and their accountable owners
+- Resource ownership history
+- Resource categories and organizational relationships
+- Issues and original intake records
+- Issue classifications and qualification records
+- Evidence and claims
+- Solution candidates and assessments
+- Decision profiles and versioned parameters
+- Feasibility results
+- Human decisions and rejected alternatives
+- Authorized actions
+- Project baselines and progress observations
+- Outcome assessments and learning recommendations
+- Audit history
+- Applicable user preferences and configuration
+
+React state may hold temporary interface state, such as an open dialog or unsaved form input. It must not be the authoritative store of business records.
+
+Remove any server-memory arrays, maps, or static objects used as a substitute for durable business persistence.
+
+Remove fake successful responses and fallback mutations that make a failed database operation appear successful.
+
+Every consequential business mutation must:
+1. Reach the server.
+2. Be validated by the server.
+3. Pass authorization and business-rule checks.
+4. Be persisted transactionally.
+5. Return the authoritative persisted result.
+6. Update the UI only after confirmed success.
+
+On failure:
+- Display an explicit error.
+- Preserve user-entered information where appropriate.
+- Do not fabricate success notifications or audit events.
+- Reconcile the UI with authoritative persisted state.
+
+Do not silently restore business state from initial constants after restart.
+
+Separate synthetic demonstration fixtures from actual operational data. Synthetic data must never be represented as verified live organizational data.
+
+==================================================
+4. DATABASE AND MIGRATIONS
+==================================================
+
+Reuse an existing approved database technology if one is documented and implemented.
+
+If no database has been approved, identify the blocker. PostgreSQL may be proposed as a technical option, but do not claim it is provisioned or authorized.
+
+Implement a database access layer, repository layer, and migration system consistent with the actual project architecture.
+
+The logical schema must cover these entities, adapting names and structure to the existing model rather than creating duplicates:
+
+A. Resource accountability
+- key_resources
+- resource_owners or canonical user references
+- resource_owner_history
+
+B. Issue management
+- issue_intakes
+- intake_events
+- issue_cases
+- issue_resource_links
+- issue_lifecycle_events
+
+C. Evidence and qualification
+- evidence_records
+- issue_claims
+- qualification_events
+
+D. Solution assessment
+- solution_candidates
+- solution_evidence
+- candidate_assessments
+- feasibility_runs
+- feasibility_findings
+
+E. Decision profiles
+- decision_profiles
+- profile_versions
+- profile_parameters
+
+F. Decisions
+- decision_snapshots
+- human_decisions
+- candidate_dispositions
+- decision_alternatives
+
+G. Execution and progress
+- actions
+- action_events
+- progress_baselines
+- progress_observations
+- progress_evidence
+
+H. Outcomes and learning
+- outcome_observations
+- outcome_reviews
+- learning_recommendations
+
+I. Security and traceability
+- application user and identity mappings, where applicable
+- role and object-access configuration
+- confidentiality grants, where applicable
+- audit_events
+- idempotency records, where applicable
+- persisted user preferences, where applicable
+
+For each implemented table or collection, define:
+- Primary key
+- Relationships and foreign keys
+- Required fields
+- Data types
+- Unique and check constraints
+- Indexes
+- Creation and modification timestamps
+- Version or concurrency fields where needed
+- Retention and deletion behavior
+- Audit requirements
+
+Use appropriate database transactions for consequential multi-record operations.
+
+Implement concurrency protection so that concurrent updates cannot silently overwrite decisions or create inconsistent lifecycle transitions.
+
+Use runtime validation for incoming API requests. TypeScript interfaces alone do not validate incoming JSON.
+
+Keep database credentials server-side. Never expose secrets in frontend bundles or committed files.
+
+Provide migration and rollback instructions appropriate to the selected database.
+
+Do not use normal application startup to overwrite existing records.
+
+If database connectivity is unavailable, implement what can be safely implemented and clearly mark real database integration as NOT VERIFIED.
+
+==================================================
+5. ISSUE INTAKE AND PROGRESSIVE ENRICHMENT
+==================================================
+
+Preserve the initial intake separately from subsequent enrichment.
+
+Record, as applicable:
+- Original issue statement
+- Linked key resources
+- Initial reporting actor
+- Creation timestamp
+- Initial evidence references
+- Subsequent amendments
+- Classification changes
+- Ownership changes
+- Scope changes
+- Additional evidence
+- Qualification results
+- Lifecycle transitions
+
+Never silently rewrite the original intake when later interpretations change.
+
+Do not require every possible detail at initial registration if the established workflow permits progressive enrichment.
+
+Keep initial entry easy and concise, then request additional information as required by the authorized lifecycle rules.
+
+Block progression when a mandatory prerequisite is absent. Do not invent mandatory intake fields or qualification thresholds.
+
+Each key resource must have one accountable owner. If a required owner is missing or ambiguous, block the affected progression and display the actual reason.
+
+==================================================
+6. EVIDENCE, PROVENANCE, AND UNCERTAINTY
+==================================================
+
+Evidence records must preserve, where available:
+- Source identity and type
+- Source record identifier
+- Originating actor or system
+- Observation time
+- Record creation time
+- Validity period
+- Evidence content or durable reference
+- Verification status
+- Related issue, resource, claim, or candidate
+- Confidentiality restrictions
+- Version and integrity metadata, where appropriate
+
+Distinguish:
+- Verified fact
+- Reported claim
+- Assumption
+- Unknown information
+- Unverified evidence
+- Stale evidence
+- Contradictory evidence
+- Derived analysis
+- AI-generated recommendation
+
+Do not treat the existence of a document or URL as proof that its contents are authentic or correct.
+
+Do not silently resolve contradictory sources.
+
+Every consequential assessment must be traceable to its inputs, applicable rules, and versioned calculations.
+
+Never fabricate evidence or imply that a source has been independently verified when it has not.
+
+==================================================
+7. DISTINCT STATUS SEMANTICS
+==================================================
+
+Ensure the data model, API, calculations, and UI distinguish missing or uncertain information from actual values.
+
+At minimum, implement the required distinctions using appropriate domain types:
+
+- UNKNOWN
+- UNVERIFIED
+- STALE
+- CONTRADICTORY
+- NOT_APPLICABLE
+- PASSED
+- FAILED
+- BLOCKED
+
+These names may be adapted to existing domain conventions, but their meanings must remain distinct.
+
+Never convert:
+- Missing numerical data into zero
+- Missing evidence into evidence of absence
+- Unknown feasibility into feasible
+- Stale observations into current observations
+- Missing progress into zero progress or full progress
+- Failed API requests into successful local mutations
+- An empty candidate set into a successful decision
+
+A genuine numerical zero must remain distinct from a missing value.
+
+A failed feasibility condition must remain distinct from a condition that has not been evaluated.
+
+Add tests for these distinctions across database, API, calculation, and UI layers.
+
+==================================================
+8. SOLUTIONS, FEASIBILITY, AND PROFILE COMPARISON
+==================================================
+
+Issues must be evaluated through solution alternatives. Projects and issues must not simply be accepted or rejected as a substitute for selecting solutions.
+
+Each solution candidate must have a durable relationship to its issue and preserve its assessment history.
+
+The system must support:
+- Multiple solution candidates
+- Required resources and dependencies
+- Expected operational and financial effects
+- Supporting evidence
+- Assumptions and uncertainty
+- Applicable decision profile
+- Feasibility findings
+- Comparative assessment
+- Human selection
+- Rejected alternatives and rejection rationale
+- Observed outcome
+
+Feasibility is a hard gate before weighted ranking.
+
+For every candidate:
+1. Identify applicable mandatory constraints.
+2. Retrieve the approved rule version.
+3. Evaluate each constraint using available evidence.
+4. Preserve the individual findings and their provenance.
+5. Determine eligibility for ranking.
+6. Compare only eligible candidates under the approved profile.
+
+If a mandatory constraint fails, the candidate must not qualify through a high weighted score.
+
+If a mandatory constraint is unknown, do not mark it as passed.
+
+If no candidate is feasible, record an explicit NO_FEASIBLE_OPTION or equivalent blocked state and invoke only an approved escalation procedure.
+
+Do not invent an escalation recipient, deadline, or override authority.
+
+Decision profiles must be versioned.
+
+The MVP may use the already approved simple qualitative parameter model, if the repository confirms its exact definitions. Do not invent weights, formulas, or thresholds.
+
+For more mature versions, support issue-type-specific solution settings and profile configurations when specified by approved requirements.
+
+Profile updates must not change the historical parameters or assessments associated with earlier decisions.
+
+The system may learn from outcomes and propose better parameters to authorized managers. It must not silently alter approved organizational decision rules.
+
+==================================================
+9. HUMAN DECISIONS AND AUDIT HISTORY
+==================================================
+
+Distinguish explicitly between:
+- AI-generated analysis
+- System-generated assessment
+- Human recommendation
+- Authorized human decision
+- Approved action
+- Observed outcome
+
+The server must not accept a client-submitted display name as proof of decision authority.
+
+Use an established authenticated identity context where available.
+
+If authentication is not configured, do not invent an identity provider. Block or disable consequential production decision recording until the required identity and authority controls are configured.
+
+Record, as applicable:
+- Issue and decision identifiers
+- Candidate set considered
+- Feasibility results
+- Profile and parameter versions
+- Assessment snapshot
+- Evidence references
+- Uncertainties and contradictions
+- Selected alternative
+- Rejected alternatives
+- Decision rationale
+- Verified actor identity
+- Decision timestamp
+- Applicable authority reference
+- Authorized overrides and their justification
+
+Store consequential audit events durably.
+
+Preserve history of:
+- Intake changes
+- Ownership and scope changes
+- Evidence changes
+- Qualification
+- Candidate revisions
+- Feasibility runs
+- Profile changes
+- Decisions
+- Rejected alternatives
+- Actions
+- Progress observations
+- Outcome reviews
+- Learning recommendations
+
+Do not silently overwrite or delete historical decisions through ordinary application operations.
+
+Use correction and supersession records when historical information must be corrected.
+
+Protect audit history through suitable database and application controls. Do not claim absolute immutability against privileged infrastructure operators unless independent protections actually establish it.
+
+Ensure audit writes and the consequential business operation are transactionally consistent.
+
+==================================================
+10. SERVER-SIDE LIFECYCLE AND AUTHORIZATION
+==================================================
+
+Implement authoritative lifecycle enforcement on the server.
+
+Inspect the existing documented lifecycle before implementing transitions.
+
+For every consequential transition, validate:
+- Current persisted state
+- Allowed transition
+- Required fields and evidence
+- Accountable ownership
+- Actor authentication
+- Authorization
+- Required qualification
+- Feasibility status
+- Applicable rule versions
+- Record version and concurrency
+- Idempotency where applicable
+
+Reject invalid transitions with actionable errors.
+
+Do not rely on disabled UI buttons as security controls.
+
+Do not allow direct API requests to bypass lifecycle restrictions.
+
+Decision-recording endpoints must independently reload and validate the authoritative persisted state. Client-submitted scores, feasibility flags, actor names, and approval statuses are not authoritative.
+
+A consequential decision must fail closed when identity, authorization, mandatory constraints, or required evidence cannot be validated.
+
+==================================================
+11. TRIPARTITE SHOP-FLOOR PROGRESS VERIFICATION
+==================================================
+
+Inspect the repository for the explicit definition of the required three-part shop-floor evidence model.
+
+If the three components and their validation rules are documented, implement those exact definitions.
+
+If they are not documented:
+- Register an OPEN BUSINESS DECISION.
+- Do not invent the three components.
+- Do not present unverified progress as verified.
+- Do not treat a numeric percentage as sufficient evidence.
+- Disable or block the verified-completion state until the evidence definition is approved.
+
+Separate:
+- Planned progress
+- Reported progress
+- Evidence-supported progress
+- Independently verified progress
+- Approved baseline
+- Actual observation
+- Unverified estimate
+
+Persist progress baselines and observations as versioned records.
+
+Each observation must reference its source, observation time, actor, applicable baseline, evidence, and verification state as required by approved rules.
+
+Do not invent progress formulas, tolerance limits, evidence issuers, or approval authorities.
+
+Contradictory or incomplete evidence must remain visible and must not result in verified progress.
+
+==================================================
+12. API AND FRONTEND CONSISTENCY
+==================================================
+
+Inspect all API routes and frontend mutation handlers.
+
+For each API, document:
+- Purpose
+- HTTP method and path
+- Request schema
+- Response schema
+- Authentication and authorization requirements
+- Validation rules
+- Error responses
+- Persistence effects
+- Audit effects
+- Concurrency behavior
+- Idempotency behavior, where applicable
+
+Use a consistent server-side service layer for consequential business operations.
+
+The UI must use authoritative API responses.
+
+For every mutation:
+1. Display pending status.
+2. Submit the request.
+3. Validate the server response.
+4. Show success only after confirmed persistence.
+5. On failure, show an explicit error.
+6. Preserve unsaved user input when appropriate.
+7. Reconcile stale views with server state.
+
+Remove catch blocks that silently mutate local business state after API failures.
+
+Temporary optimistic presentation is permitted only where safe and must revert on failure. Do not present decisions, approvals, feasibility, or verified progress as final before authoritative confirmation.
+
+Use stable identifiers and consistent domain services so that Home-screen summaries and detail pages show the same underlying business facts.
+
+Add cross-page consistency tests for important statuses and derived metrics.
+
+==================================================
+13. HOME SCREEN — STRICT VISUAL FIDELITY
+==================================================
+
+Use the actual repository file:
+
+src/main.png
+
+as the authoritative visual reference.
+
+Do not redesign the Home page or add, remove, or restructure its elements according to personal preference.
+
+Inspect the reference image and the actual rendered application.
+
+Compare:
+- Page structure
+- Header and navigation
+- Sidebar dimensions and placement
+- Card layout
+- Content sections
+- Alignment and spacing
+- Typography
+- Colors and surfaces
+- Borders and radii
+- Icons and labels
+- Visible controls
+- Loading, empty, error, and populated states
+
+The Home screen must use fresh synthetic demonstration values rather than copied values from the reference image.
+
+Synthetic records must be identifiable as synthetic and must not be confused with verified live data.
+
+Do not invent new Home-screen components.
+
+The approved design includes the five top-level executive cards:
+1. Near-term intervention deadlines
+2. Essential management decisions
+3. Liquidity
+4. Key customer commitments
+5. Operational bottlenecks
+
+Below those cards, preserve the established two-section arrangement:
+- Value and risk map of projects
+- Status of the product portfolio by business area
+
+Preserve the remaining reference-image elements and their original arrangement.
+
+Do not add, remove, or rearrange additional sections without explicit approval.
+
+The default theme must be dark.
+
+Theme switching must be available inside the existing Settings menu. Do not add a separate prominent theme control if absent from the reference.
+
+Use centralized theme tokens rather than inconsistent hardcoded color overrides.
+
+If screenshot capture and visual comparison are available, compare the rendered Home screen with src/main.png at a documented viewport.
+
+If visual comparison cannot be performed, report NOT VERIFIED and provide exact reproducible validation steps.
+
+==================================================
+14. ENGLISH AND PERSIAN LOCALIZATION
+==================================================
+
+Implement full English and Persian localization.
+
+English:
+- LTR layout
+
+Persian:
+- RTL layout
+
+Centralize translations for:
+- Navigation
+- Page headings
+- Buttons
+- Form labels
+- Placeholders
+- Validation
+- Errors
+- Empty and loading states
+- Dialogs
+- Tables
+- Notifications
+- Statuses
+- Tooltips
+- Settings
+- Accessibility labels
+- Decision and feasibility explanations
+
+Do not translate only the main navigation while leaving the remaining interface hardcoded.
+
+Ensure correct mixed Persian/English text, identifiers, numbers, dates, and currency rendering.
+
+Test RTL behavior in navigation, dialogs, tables, forms, and controls.
+
+Persist language and theme preferences through the database when a verified user identity and database infrastructure are available. Do not claim persistence if it is only stored in browser memory.
+
+Preserve the approved Home-screen visual hierarchy in both languages.
+
+==================================================
+15. GOOGLE AI STUDIO ENVIRONMENT
+==================================================
+
+Inspect the actual project and supported execution environment.
+
+Use the existing React and TypeScript architecture where appropriate.
+
+Structure the project for maintainable development, preview, testing, and deployment through the available Google AI Studio workflow.
+
+Do not assume Google AI Studio automatically provisions:
+- A production database
+- Persistent backend storage
+- Authentication
+- Authorization
+- Secrets management
+- Production deployment
+- Backup or recovery infrastructure
+
+Document the actual boundary between:
+- Frontend
+- Application API
+- Domain services
+- Database layer
+- Authentication
+- Authorization
+- External integrations
+- AI-assisted analysis
+
+Do not connect privileged database credentials directly to the browser.
+
+Do not claim that a deployment or external service is operational without verification.
+
+==================================================
+16. OPEN BUSINESS AND INFRASTRUCTURE BLOCKERS
+==================================================
+
+Search existing repository documentation for answers before registering a blocker.
+
+If a required answer is missing, do not invent it.
+
+At minimum, investigate:
+
+B-01: Approved database technology, hosting, and connection configuration.
+
+B-02: Authentication provider, canonical user identity, and account lifecycle.
+
+B-03: Organizational authority, object permissions, and confidentiality rules.
+
+B-04: Exact three components of tripartite shop-floor evidence and their validation authorities.
+
+B-05: Approved feasibility constraints, constraint sources, and escalation procedure.
+
+B-06: Approved profile parameters, weights, calculation formulas, and treatment of missing data.
+
+B-07: Approved progress and outcome metrics, baselines, units, currencies, and tolerances.
+
+B-08: Exact visual acceptance viewport and availability of screenshot comparison.
+
+B-09: Audit retention, backup, restoration, recovery objectives, and privileged access controls.
+
+B-10: Approved business rules governing overrides and exceptional decisions.
+
+For each unresolved blocker, document:
+- Blocker ID
+- Missing decision or infrastructure dependency
+- Why it matters
+- Affected features
+- Safe interim behavior
+- Evidence needed for resolution
+- Responsible owner only if established in existing documentation
+
+Implement safe technical structures wherever possible, but do not enable unsafe consequential behavior.
+
+==================================================
+17. REQUIRED AUTOMATED TESTS
+==================================================
+
+Inspect existing test infrastructure and implement tests appropriate to the project.
+
+A. Build and static checks
+- Type checking
+- Production build
+- Linting if configured
+- Migration validation
+
+B. Persistence
+- Create and retrieve records
+- Confirm updates persist
+- Confirm failures are reported honestly
+- Confirm no false-success fallback
+- Confirm startup does not overwrite existing data
+- Confirm transaction rollback
+- Confirm safe retry behavior
+- Confirm persistence across server restart when a real durable database is available
+
+C. Issue lifecycle
+- Original intake preserved
+- Required ownership enforced
+- Invalid transitions rejected
+- Unauthorized transitions rejected
+- Stale concurrent updates rejected
+
+D. Feasibility and decisions
+- Hard constraints precede ranking
+- Failed constraints block eligibility
+- Unknown constraints do not pass
+- No feasible solution creates an explicit blocked state
+- AI recommendations remain distinct from human decisions
+- Unauthorized decisions are rejected
+- Rejected alternatives and rationale are preserved
+- Historical profile versions remain unchanged
+
+E. Evidence and progress
+- Unknown differs from zero
+- Missing evidence differs from verified evidence
+- Contradictions remain visible
+- Stale evidence is identified
+- Percentage alone cannot verify progress
+- Missing tripartite evidence blocks verification
+- Progress history is preserved
+
+F. Audit
+- Consequential mutations produce durable audit records
+- Failed transactions do not produce false success records
+- Ordinary users cannot silently overwrite historical decisions
+- Required actor, timestamp, target, and operation are recorded
+
+G. UI
+- Home layout compared with src/main.png
+- Dark theme is the default
+- Theme switching remains inside Settings
+- English LTR
+- Persian RTL
+- Consistent summary and detail data
+- Synthetic records are distinguishable from verified operational data
+
+Do not report a test as passed unless it was actually executed.
+
+If a real database is unavailable, distinguish test-double results from real database integration results.
+
+==================================================
+18. DOCUMENTATION AND TRACEABILITY
+==================================================
+
+Update the actual repository documentation, including when present:
+
+- README.md
+- docs/GOOGLE_AI_STUDIO_BUILD_SPEC.md
+- docs/GOOGLE_AI_STUDIO_IMPLEMENTATION_PROMPT.md
+
+Create or update supporting documents as appropriate:
+- Architecture overview
+- Domain and lifecycle model
+- Database schema and migrations
+- API contracts
+- Authentication and authorization boundaries
+- Evidence and provenance model
+- Feasibility and decision controls
+- Progress verification
+- Localization and visual verification
+- Environment configuration
+- Deployment prerequisites
+- Backup and recovery
+- Testing and release results
+- Open business decisions
+
+Maintain traceability:
+
+REQUIREMENT
+→ DOMAIN RULE
+→ DATABASE SCHEMA
+→ API / SERVICE
+→ UI
+→ TEST
+→ VERIFICATION EVIDENCE
+
+Documentation must describe implemented behavior accurately.
+
+A requirement appearing in documentation is not evidence that the feature is implemented.
+
+==================================================
+19. EXECUTION ORDER
+==================================================
+
+Execute the following sequence:
+
+PHASE 0 — Baseline
+Inspect the repository, requirements, source files, reference image, and existing test status.
+
+PHASE 1 — Persistence
+Correct database integration, schema, migrations, repositories, transaction boundaries, and runtime mutations.
+
+PHASE 2 — Domain controls
+Implement ownership, intake preservation, evidence semantics, lifecycle validation, feasibility gating, and decision recording.
+
+PHASE 3 — Audit and security
+Implement durable audit records, authenticated actor handling, authorization enforcement, concurrency controls, and safe failure behavior.
+
+PHASE 4 — Progress and outcomes
+Implement only approved progress verification and outcome logic. Block undefined verification rules.
+
+PHASE 5 — Frontend integration
+Remove false-success fallbacks, connect all consequential operations to persisted APIs, and reconcile summary and detail views.
+
+PHASE 6 — UI and localization
+Compare Home with src/main.png, preserve the layout, verify dark default and Settings-based theme switching, and validate English/Persian localization.
+
+PHASE 7 — Tests and documentation
+Run available checks, add regression tests, update specifications, and produce a traceability matrix.
+
+PHASE 8 — Final audit
+Reinspect the changed code, search for remaining in-memory business persistence and false-success paths, and verify that documentation reflects the actual implementation.
+
+Adapt sequencing only when actual project dependencies require it. Document material deviations.
+
+==================================================
+20. REQUIRED DELIVERABLES
+==================================================
+
+Produce actual repository changes where the environment permits:
+
+D-01. Corrected application code.
+
+D-02. Versioned database schema and migration artifacts.
+
+D-03. Persistent repositories and server-side domain services.
+
+D-04. Corrected API routes and runtime validation.
+
+D-05. Lifecycle, feasibility, decision, and audit controls.
+
+D-06. Safe progress verification and outcome recording.
+
+D-07. Corrected frontend with no false-success business mutations.
+
+D-08. Home-screen visual verification against src/main.png.
+
+D-09. English/Persian localization with LTR/RTL behavior.
+
+D-10. Automated tests and actual test results.
+
+D-11. Updated architecture and Google AI Studio documentation.
+
+D-12. Requirement-to-test compliance matrix.
+
+D-13. Open business and infrastructure blocker register.
+
+D-14. Final change report with files created, modified, or removed.
+
+D-15. Database, visual, security, and deployment verification status.
+
+==================================================
+21. COMPLIANCE STATUS DEFINITIONS
+==================================================
+
+Use only these status values:
+
+PASS
+Implemented and verified with evidence.
+
+FAIL
+A known defect or unmet requirement remains.
+
+PARTIAL
+Some functionality is implemented, but the requirement is incomplete.
+
+BLOCKED
+An unresolved business decision or external dependency prevents safe completion.
+
+NOT VERIFIED
+Verification could not be performed.
+
+For every requirement, report:
+- Requirement ID
+- Requirement
+- Status
+- Changed files
+- Test or verification method
+- Actual result
+- Remaining limitation
+
+Do not issue PASS for untested assumptions.
+
+Do not declare full compliance if any mandatory P0 requirement remains unimplemented or unverified.
+
+==================================================
+22. DEFINITION OF DONE
+==================================================
+
+Completion requires evidence that:
+
+1. All authoritative business state uses durable database persistence.
+2. Failed writes cannot appear successful.
+3. Static initial data is not used as authoritative runtime business state.
+4. Lifecycle rules are enforced server-side.
+5. Original intake and consequential history are preserved.
+6. Evidence provenance, uncertainty, contradictions, and freshness are represented.
+7. Unknown never silently means zero, healthy, or feasible.
+8. Hard feasibility constraints precede ranking.
+9. No feasible solution produces an explicit blocked/escalation state.
+10. AI recommendations remain distinct from human decisions.
+11. Rejected alternatives and decision rationale are retained.
+12. Profile and assessment versions remain traceable.
+13. Progress cannot be marked verified without approved required evidence.
+14. Audit history is durable and protected against ordinary silent mutation.
+15. Authentication and authorization are enforced at server trust boundaries.
+16. Home-screen fidelity is checked against src/main.png.
+17. Dark is the default theme and theme switching remains inside Settings.
+18. English LTR and Persian RTL function consistently.
+19. Home-screen summaries and detail pages use consistent persisted facts.
+20. Relevant tests are executed and actual outcomes reported.
+21. Documentation matches the implementation.
+22. All unresolved business decisions are documented.
+23. No database, security, deployment, or verification success is claimed without evidence.
+
+==================================================
+23. FINAL REPORT
+==================================================
+
+After implementing changes, return:
+
+1. EXECUTIVE STATUS
+   Overall verdict and critical requirement status table.
+
+2. CHANGES IMPLEMENTED
+   Actual files created, modified, or removed.
+
+3. DATABASE AND PERSISTENCE
+   Database technology, migrations, connection status, persistence tests, and limitations.
+
+4. BUSINESS CONTROLS
+   Lifecycle, evidence, feasibility, decision, audit, and progress controls implemented and tested.
+
+5. UI AND LOCALIZATION
+   Actual visual comparison, tested viewport, dark-theme behavior, English LTR, and Persian RTL results.
+
+6. TEST AND BUILD RESULTS
+   Exact commands executed and actual outcomes.
+
+7. OPEN BLOCKERS
+   Missing decisions, their consequences, safe interim behavior, and what is required to close them.
+
+8. REQUIREMENT-TO-TEST MATRIX
+   Requirement, implementation files, verification evidence, and status.
+
+9. RESIDUAL RISKS
+   Remaining security, integrity, concurrency, migration, operational, and product risks.
+
+10. FINAL COMPLIANCE VERDICT
+    Select exactly one:
+    PASS — all mandatory requirements implemented and verified
+    FAIL — mandatory requirements remain unmet
+    BLOCKED — implementation or verification depends on unresolved prerequisites
+
+FINAL EXECUTION RULE
+
+Begin by inspecting the actual repository. Then implement and verify the corrections.
+
+Do not stop after presenting recommendations.
+
+Do not ask the user to repeat information already present in the repository.
+
+Do not invent business definitions, evidence requirements, formulas, thresholds, authority rules, or infrastructure facts.
+
+Where implementation is safe, proceed immediately. Where a missing definition prevents safe consequential behavior, implement the necessary technical structure, fail closed, and register the exact blocker.
+
+Never claim success without evidence.
+
+The objective is a trustworthy, auditable, database-backed enterprise decision-control system—not a demo that merely appears to work.
