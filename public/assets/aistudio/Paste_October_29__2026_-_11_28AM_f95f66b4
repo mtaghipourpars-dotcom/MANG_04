@@ -1,0 +1,1309 @@
+# MANG_04 — ZERO-TRUST CORRECTIVE ACTION PROMPT
+## Executive AI Truth Auditor, Principal Architect & Lead Developer
+
+### 1. MISSION AND AUTHORITY
+
+You are the Principal Software Architect, Senior Full-Stack Engineer, Database Architect, Security Engineer, QA Lead, and Zero-Trust Compliance Auditor responsible for correcting the existing **MANG_04** repository.
+
+Your task is to transform the existing application into a coherent, auditable, database-backed enterprise decision-support system without destroying its established product concept, existing useful functionality, or approved visual design.
+
+This is an implementation assignment, not a conceptual review.
+
+You must:
+
+1. Inspect the complete existing repository before making changes.
+2. Establish the actual current state of the application, its data models, API routes, UI components, documentation, and tests.
+3. Identify and correct confirmed defects.
+4. Implement missing capabilities only where their required behavior is supported by existing requirements or can be safely defined as technical implementation details.
+5. Preserve unresolved business decisions as explicit blockers instead of inventing business rules.
+6. Execute the available tests, add missing tests, and report verifiable results.
+7. Update the relevant source files, database schema and migrations, documentation, and implementation instructions.
+8. Produce a traceable list of completed changes, failed checks, and unresolved blockers.
+
+**Do not stop after generating recommendations, a plan, sample code, or a proposed architecture. Modify the actual repository and verify the result wherever the environment and available tools permit.**
+
+Do not claim that a task is complete merely because code was generated. Completion requires implementation evidence and appropriate validation.
+
+---
+
+### 2. PRODUCT DEFINITION — NON-NEGOTIABLE
+
+MANG_04 is an enterprise resource and decision-control system.
+
+It is not simply a dashboard, a project tracker, an ERP replacement, or an autonomous AI decision-maker.
+
+Its central operating model is:
+
+1. Identify an issue associated with a key enterprise resource.
+2. Establish the issue's scope, ownership, evidence, uncertainty, and operational significance.
+3. Preserve the original intake and subsequent enrichment as traceable records.
+4. Develop and evaluate possible solutions.
+5. Apply mandatory feasibility constraints before comparative ranking.
+6. Present qualified alternatives and their evidence to authorized human decision-makers.
+7. Record the actual human decision, including rejected alternatives and rationale.
+8. Track authorized actions and verify actual progress against an approved baseline.
+9. Evaluate outcomes and record evidence-based learning recommendations.
+
+The system assists human judgment. **The authorized human decision-maker remains accountable for the decision.**
+
+AI may assist with classification, extraction, comparison, analysis, explanation, and recommendations. AI must not silently manufacture evidence, bypass mandatory constraints, impersonate an authorized decision-maker, or turn a recommendation into an approved decision.
+
+Every consequential result must be traceable to its underlying records, evidence, assumptions, applicable rules, and decision history.
+
+---
+
+### 3. ZERO-TRUST EXECUTION RULES
+
+Apply the following rules throughout the implementation.
+
+#### 3.1 Inspect before changing
+
+Inspect all relevant files, including at minimum:
+
+- `src/main.png`
+- `src/App.tsx`
+- `src/types.ts`
+- `src/data.ts`
+- `server.ts`
+- `src/main.tsx`
+- All components and modal dialogs
+- All API clients and API routes
+- All configuration and environment files
+- `package.json` and lockfiles
+- Existing database, persistence, migration, and authentication code
+- Existing tests and build configuration
+- `README.md`
+- `docs/GOOGLE_AI_STUDIO_BUILD_SPEC.md`
+- `docs/GOOGLE_AI_STUDIO_IMPLEMENTATION_PROMPT.md`
+- Other documents defining requirements or business behavior
+
+Search the entire repository for:
+
+- In-memory business-state arrays and maps
+- `INITIAL_*` data used as runtime state
+- Local fallback mutations after failed API calls
+- Mock persistence and fake successful responses
+- Client-side authorization or feasibility checks presented as authoritative
+- Direct mutation routes that bypass lifecycle controls
+- Client-generated actor identities or audit records
+- Missing database transactions
+- Unversioned decision parameters
+- Unverified progress calculations
+- Hardcoded UI text that is not localized
+- Unimplemented controls presented as operational
+- Duplicate or conflicting business definitions
+
+The file list above is a minimum inspection list, not a complete inventory.
+
+#### 3.2 Do not guess business rules
+
+Distinguish these categories in code, documentation, and reports:
+
+- **CONFIRMED REQUIREMENT:** explicitly established by existing project requirements.
+- **TECHNICAL IMPLEMENTATION:** an engineering mechanism that does not change business meaning.
+- **ASSUMPTION:** a provisional choice that must be visible and replaceable.
+- **OPEN BUSINESS DECISION:** a missing rule requiring an authorized human decision.
+- **NOT VERIFIED:** a capability or condition for which evidence is unavailable.
+
+Do not silently convert assumptions into confirmed requirements.
+
+Where a missing business rule prevents safe execution, implement a fail-closed state and identify the exact decision required.
+
+Do not fabricate thresholds, approval hierarchies, formulas, confidentiality policies, qualification criteria, evidence authorities, or operational definitions.
+
+#### 3.3 Preserve existing useful work
+
+Before changing architecture:
+
+- Identify current functionality and dependencies.
+- Reuse existing suitable components and domain models.
+- Avoid duplicate entities and competing sources of truth.
+- Make changes incrementally.
+- Preserve existing useful UI behavior.
+- Document breaking changes and migration implications.
+
+Do not replace the entire application with a generic template.
+
+---
+
+### 4. CORRECTIVE ACTION A — DATABASE-ONLY BUSINESS PERSISTENCE
+
+**Priority: P0 — Release blocking**
+
+#### 4.1 Eliminate in-memory business persistence
+
+The application must not depend on server-process memory or browser memory as the authoritative storage for business state.
+
+Remove or replace patterns such as:
+
+- Server-side arrays holding projects, decisions, domains, timeline events, or audit records.
+- Mutations that update those arrays as if they were durable transactions.
+- Frontend state used as a successful substitute when an API call fails.
+- Runtime business data that is silently reconstructed from `INITIAL_*` constants.
+- Reset or seed routes that overwrite actual business records without an explicitly authorized, controlled operation.
+
+React state may still be used for temporary presentation state, such as open dialogs, selected tabs, unsaved form values, and loading indicators. It must not become the authoritative record of a business operation.
+
+#### 4.2 Establish a persistent data-access architecture
+
+Use a database-backed repository or service layer.
+
+The preferred database target is PostgreSQL unless the repository already contains an explicitly approved database choice. Do not claim PostgreSQL is provisioned merely because the code supports it.
+
+Create or correct the architecture so that:
+
+- UI components call application services or API endpoints.
+- API handlers validate requests and enforce authorization.
+- Domain services enforce business invariants.
+- Repository functions perform database operations.
+- Database transactions protect multi-record business operations.
+- Persistent records can be retrieved after a server restart.
+- Concurrent updates cannot silently overwrite conflicting decisions or state transitions.
+- Database errors are returned as explicit failures, not disguised as successful local changes.
+
+Keep database credentials and privileged configuration on the server side. Never expose secrets through frontend bundles or repository commits.
+
+If the execution environment does not provide database provisioning, implement the integration and migration artifacts, document the required environment variables, and mark live database verification as **NOT VERIFIED**.
+
+#### 4.3 Database integrity requirements
+
+Implement appropriate:
+
+- Primary keys
+- Foreign keys
+- Unique constraints
+- Required-field constraints
+- Check constraints
+- Indexes for expected query patterns
+- Created and updated timestamps
+- Actor references where available
+- Version fields for mutable records
+- Transactions for atomic operations
+- Idempotency handling for retryable commands where needed
+- Explicit migration and rollback strategy
+
+Use database constraints for critical invariants whenever possible. Application-level validation alone is insufficient for invariants that must survive concurrent requests.
+
+Never silently discard failed writes.
+
+#### 4.4 Data initialization
+
+Separate reference data, development fixtures, and production business data.
+
+- Keep synthetic data for demonstrations and development.
+- Mark synthetic records as synthetic or demo records where appropriate.
+- Do not present fabricated data as verified live enterprise data.
+- Seed reference data through controlled, repeatable scripts.
+- Make seed operations safe to rerun.
+- Do not let normal application startup erase or replace existing records.
+- Never expose a destructive reset operation as an ordinary production feature.
+
+---
+
+### 5. CORRECTIVE ACTION B — CANONICAL DOMAIN MODEL
+
+**Priority: P0 — Release blocking**
+
+Inspect the existing model first. Extend or normalize existing entities rather than blindly creating duplicate tables.
+
+The implementation must support the following conceptual record groups. Exact physical names may follow established repository conventions.
+
+#### 5.1 Resource identity and accountability
+
+Support:
+
+- `key_resources`
+- `resource_owner_history`
+
+Each key resource must have a stable identity.
+
+Resource ownership must not be represented solely by an arbitrary display-name string where a canonical identity is available.
+
+Support accountable ownership, ownership history, and effective dates as required by the existing requirements.
+
+Enforce the rule that every active issue has exactly one accountable owner at the relevant lifecycle stage. If ownership is missing, ambiguous, or invalid, block progression to stages that require accountability.
+
+Do not invent the organization's resource taxonomy or owner assignment policy.
+
+#### 5.2 Issue intake and lifecycle
+
+Support the concepts of:
+
+- `issue_intakes`
+- `intake_events`
+- `issue_cases`
+- `issue_object_links`
+
+The intake record must preserve what was originally submitted.
+
+Subsequent enrichment must not silently rewrite the original submission.
+
+Use separate records or versioned events to preserve:
+
+- Original intake
+- Corrections and amendments
+- Additional context
+- Classification changes
+- Ownership changes
+- Scope changes
+- Lifecycle transitions
+- The actor, timestamp, and reason for consequential changes
+
+The system must distinguish the original issue statement from later interpretations and derived analytical conclusions.
+
+Support traceable links between issues and relevant resources or business objects.
+
+Do not assume that every issue is a project, or that every issue can be represented adequately by a project record.
+
+#### 5.3 Evidence, claims, and uncertainty
+
+Support the concepts of:
+
+- `evidence_records`
+- `issue_claims`
+- `qualification_events`
+
+Every consequential factual claim should be traceable to its supporting evidence, or explicitly identified as unsupported, assumed, disputed, or unknown.
+
+Where available, evidence records should preserve:
+
+- Source and source identifier
+- Source type
+- Originating actor or system
+- Observation or reporting time
+- Record creation time
+- Validity period, if known
+- Evidence content or durable reference
+- Verification status
+- Provenance
+- Relevant issue, claim, resource, or candidate
+- Confidentiality classification or access restrictions
+- Version or integrity metadata where appropriate
+
+Do not represent a file path, URL, or descriptive note as verified evidence merely because it exists.
+
+Do not invent source authenticity, independent verification, or evidence freshness.
+
+Represent conflicting claims explicitly. Do not silently choose one contradictory source as correct.
+
+#### 5.4 Solution alternatives and assessments
+
+Support the concepts of:
+
+- `solution_candidates`
+- `solution_evidence`
+- `candidate_assessments`
+
+Each candidate must be linked to the issue it addresses.
+
+Record relevant assumptions, evidence, estimated effects, required resources, constraints, uncertainties, and assessment versions.
+
+Preserve rejected and superseded candidates. Do not delete them simply because a different candidate becomes preferred.
+
+Candidate rankings must be reproducible from the applicable parameter versions, assessment data, and evaluation logic.
+
+#### 5.5 Feasibility and hard constraints
+
+Support the concepts of:
+
+- `feasibility_runs`
+- `feasibility_findings`
+
+Feasibility is a gate, not merely another weighted score.
+
+For every candidate:
+
+1. Evaluate applicable mandatory constraints.
+2. Record the constraint version and evaluation evidence.
+3. Record each finding, including unknown or unverified conditions.
+4. Determine whether the candidate is eligible for comparative ranking.
+5. Rank only eligible candidates under the approved decision method.
+
+If a mandatory constraint fails, the candidate must not be treated as feasible merely because its overall weighted score is high.
+
+If a mandatory constraint cannot be evaluated because evidence or an approved rule is missing, represent the result as unknown or blocked, not as passed.
+
+If no candidate passes the required feasibility gate, do not fabricate a winner. Enter an explicit no-feasible-option state and invoke only the escalation procedure defined by approved requirements.
+
+Do not invent the escalation recipient or deadline.
+
+#### 5.6 Decision profiles and parameter versioning
+
+Support the concepts of:
+
+- `decision_profiles`
+- `profile_versions`
+- `profile_parameters`
+
+Preserve the exact parameter configuration used for each consequential evaluation.
+
+Do not silently change an old decision's historical inputs when a profile is edited.
+
+If the existing project requirements define profile weights, qualification rules, or aggregation logic, implement those definitions exactly.
+
+If they do not, provide configuration structures and mark the business formula as unresolved. Do not invent official weights or thresholds.
+
+#### 5.7 Decisions and alternatives
+
+Support the concepts of:
+
+- `decision_snapshots`
+- `candidate_dispositions`
+- `human_decisions`
+- `decision_alternatives`
+
+A decision record must preserve, as applicable:
+
+- Issue and decision identifiers
+- Candidate set considered
+- Candidate assessment versions
+- Feasibility results
+- Applicable profile and parameter version
+- Evidence references
+- Known uncertainties and contradictions
+- Approved recommendation or analysis snapshot
+- Selected alternative
+- Rejected alternatives
+- Decision rationale
+- Decision-maker identity
+- Decision timestamp
+- Applicable authority or approval reference
+- Any required override and its justification
+
+The record must distinguish an AI recommendation from a human decision.
+
+The client must not be able to manufacture authoritative decision-maker identity by submitting an arbitrary name in a request body.
+
+The server must derive the authenticated actor from a verified identity context when authentication is available. If the identity provider is not configured, consequential decision recording must fail closed or remain disabled in a clearly documented development-only mode.
+
+Do not assume an authentication provider exists.
+
+#### 5.8 Actions, progress, and outcomes
+
+Support the concepts of:
+
+- `actions`
+- `action_events`
+- `progress_baselines`
+- `progress_observations`
+- `progress_evidence`
+- `outcome_observations`
+- `outcome_reviews`
+- `learning_recommendations`
+
+Actions must be linked to the decision or issue that authorized them.
+
+Progress must be measured against a defined and versioned baseline. Preserve baseline history.
+
+Progress observations must not overwrite previous observations.
+
+Outcome records must distinguish expected outcomes from observed outcomes.
+
+Learning recommendations must preserve their origin, evidence, review status, and relationship to prior issues or decisions.
+
+Do not automatically turn a learning recommendation into a mandatory organizational rule without an explicitly authorized approval process.
+
+#### 5.9 Identity, access, and audit
+
+Assess the need for and implement the following conceptual groups according to the existing architecture:
+
+- User and identity mappings
+- Role and object permissions
+- Confidentiality grants
+- `audit_events`
+- Idempotency records
+- User preferences
+
+Do not assume the identity provider, role matrix, or confidentiality policy is already defined.
+
+Implement the security enforcement points and clearly identify configuration required from the organization.
+
+---
+
+### 6. CORRECTIVE ACTION C — UNKNOWN MUST NEVER MEAN ZERO, HEALTHY, OR FEASIBLE
+
+**Priority: P0 — Release blocking**
+
+Establish explicit domain states for missing, incomplete, stale, disputed, or unverified information.
+
+At minimum, distinguish where applicable:
+
+- `KNOWN`
+- `UNKNOWN`
+- `NOT_APPLICABLE`
+- `UNVERIFIED`
+- `STALE`
+- `CONTRADICTORY`
+- `FAILED`
+- `PASSED`
+- `BLOCKED`
+
+These are proposed technical state names, not permission to collapse different business meanings into one generic status. Refine them against existing terminology.
+
+The application must not silently convert:
+
+- Missing values to zero
+- Missing evidence to evidence of absence
+- Missing constraints to passed constraints
+- Unverified sources to verified sources
+- Stale observations to current observations
+- An empty candidate list to a successful result
+- Failed API requests to successful local updates
+- Unknown progress to zero progress or full progress
+
+A genuine numerical zero must remain distinct from a missing numerical value.
+
+A missing feasibility result must remain distinct from a passed feasibility result.
+
+A missing observation must remain distinct from an observation that confirms no activity.
+
+Update types, schemas, API contracts, UI rendering, calculations, filters, and tests consistently.
+
+---
+
+### 7. CORRECTIVE ACTION D — IMMUTABLE HISTORY AND TRUSTWORTHY AUDIT
+
+**Priority: P0 — Release blocking**
+
+Implement an auditable history for consequential business operations.
+
+Do not treat an editable in-memory array or client-generated timeline entry as a trustworthy audit trail.
+
+Use durable database records for:
+
+- Intake creation and amendments
+- Ownership and scope changes
+- Evidence additions and verification changes
+- Qualification and classification changes
+- Candidate creation and revisions
+- Feasibility runs
+- Parameter and profile versions
+- Decisions and overrides
+- Rejected alternatives
+- Action authorization and execution events
+- Progress observations
+- Outcome reviews
+- Learning recommendations
+- Authorization failures and other security-relevant events, where appropriate
+
+History requirements:
+
+1. Record who performed the operation, using a verified identity where available.
+2. Record when it occurred.
+3. Record the target object and operation.
+4. Preserve the relevant before/after state or an equivalent immutable event representation.
+5. Record a reason for consequential amendments where required.
+6. Preserve references to the rules and versions used.
+7. Prevent ordinary application users from silently editing or deleting historical decision records.
+8. Provide controlled correction or supersession mechanisms instead of erasing history.
+9. Ensure a failed transaction does not leave a partially recorded consequential operation.
+10. Make audit retention and privileged access explicit.
+
+Use database permissions, append-only event patterns, constraints, or other suitable controls to protect history. Do not claim absolute immutability if database administrators or infrastructure operators can alter the records without independent detection.
+
+Do not store secrets, credentials, or unnecessary sensitive information in audit payloads.
+
+---
+
+### 8. CORRECTIVE ACTION E — ENFORCE THE LIFECYCLE SERVER-SIDE
+
+**Priority: P0 — Release blocking**
+
+The UI may display lifecycle state, but it must not be the authoritative enforcement mechanism.
+
+Implement a defined server-side state-transition service.
+
+First, inspect the existing documented lifecycle. Do not invent undocumented approval stages or business thresholds.
+
+For every transition, validate:
+
+- The current persisted state
+- Whether the transition is allowed
+- Required fields and evidence
+- Resource ownership
+- Actor authorization
+- Required qualification status
+- Applicable mandatory constraints
+- Version consistency
+- Whether the action has already been processed
+- Whether the operation can be committed atomically
+
+Reject invalid transitions with explicit, actionable errors.
+
+Prevent clients from bypassing the lifecycle by calling a lower-level API directly.
+
+Use concurrency protection, such as optimistic version checks or appropriate database locking, where concurrent operations could invalidate a decision.
+
+The following are conceptual lifecycle stages, not a mandate to invent missing business approvals:
+
+1. Intake recorded
+2. Intake reviewed and enriched
+3. Issue qualified
+4. Solution alternatives assessed
+5. Feasibility evaluated
+6. Decision submitted to an authorized human
+7. Human decision recorded
+8. Authorized actions tracked
+9. Progress evidence reviewed
+10. Outcomes assessed
+11. Learning recommendations reviewed
+
+Map these stages to the actual established business terminology and document any unresolved transition rules.
+
+A system must not claim that an issue has reached a later stage when its mandatory prerequisites are missing.
+
+---
+
+### 9. CORRECTIVE ACTION F — DECISION AND FEASIBILITY API SECURITY
+
+**Priority: P0 — Release blocking**
+
+Inspect every endpoint that creates, updates, records, or finalizes decisions.
+
+In particular, examine any existing route resembling:
+
+`POST /api/decisions/:id/record`
+
+Do not assume the current route is secure or complete.
+
+Implement a server-side decision command that:
+
+1. Loads the authoritative issue, candidate, feasibility, and profile records.
+2. Checks the current lifecycle state and version.
+3. Validates all required fields.
+4. Confirms the actor's identity and authority.
+5. Verifies that all mandatory constraints have been evaluated under the applicable approved rules.
+6. Prevents an ineligible candidate from being selected as if it passed feasibility.
+7. Preserves the candidate set and evaluation snapshot used for the decision.
+8. Records the human's actual selection and rationale.
+9. Preserves rejected alternatives and any authorized override.
+10. Writes the decision and audit events transactionally.
+11. Rejects stale, duplicated, unauthorized, or invalid commands.
+12. Returns the authoritative persisted result.
+
+A UI button being disabled is not a security control.
+
+A client-submitted score, status, actor name, or feasibility flag is not authoritative evidence.
+
+If required identity, business rules, or feasibility evidence is unavailable, block consequential finalization rather than assuming success.
+
+---
+
+### 10. CORRECTIVE ACTION G — TRIPARTITE SHOP-FLOOR PROGRESS VERIFICATION
+
+**Priority: P0 for any feature that claims verified operational progress**
+
+Inspect all existing documentation and code for the agreed definition of tripartite shop-floor evidence.
+
+Do not invent the three evidence components if they are not explicitly defined.
+
+Where the three components are defined, implement the exact required evidence model, validation, source authority, and relationships.
+
+Where the components or verification rules are not defined:
+
+- Mark the exact business definition as an open blocker.
+- Do not present the corresponding progress as verified.
+- Do not create fake evidence to satisfy the requirement.
+- Do not treat a numeric `progressPercent` value as sufficient proof.
+- Do not enable a verified-completion status merely because an operator enters a percentage.
+
+Separate the following concepts:
+
+- Planned progress
+- Reported progress
+- Evidence-supported progress
+- Independently verified progress
+- Approved baseline
+- Actual observation
+- Unverified estimate
+
+Each progress observation must preserve its timestamp, source, actor, evidence references, applicable baseline, and verification status as appropriate.
+
+Validate that the observation is consistent with the required evidence and approved measurement rules.
+
+If the evidence is incomplete or contradictory, return an explicit blocked, unverified, or disputed status according to the established definitions.
+
+Preserve the full history of progress observations.
+
+Do not invent progress formulas, tolerances, required issuers, or evidence authorities.
+
+---
+
+### 11. CORRECTIVE ACTION H — REMOVE FALSE SUCCESS AND LOCAL FALLBACK MUTATIONS
+
+**Priority: P0 — Release blocking**
+
+Inspect all client-side API calls and error handling.
+
+Remove behavior that silently updates the UI as if a business operation succeeded when the server or database operation failed.
+
+For each consequential mutation:
+
+1. Submit the command to the server.
+2. Display a pending state while the request is in progress.
+3. Treat the server's persisted response as authoritative.
+4. Update or invalidate local views only after confirmed success.
+5. On failure, show a clear error and preserve user-entered content when appropriate.
+6. Do not display success notifications before confirmation.
+7. Do not append fake audit or timeline events to make a failed action appear successful.
+8. Prevent duplicate submissions where appropriate.
+9. Handle retries safely when an operation might have committed but the response was lost.
+10. Reconcile stale views with persisted state.
+
+Temporary optimistic UI may be used only where safe and must roll back on failure. Do not use optimistic presentation for final decisions, approvals, feasibility outcomes, or verified progress unless the authoritative state remains unmistakably pending.
+
+Search for all code paths that catch API errors and then mutate local business state. Correct each one and add regression tests.
+
+---
+
+### 12. CORRECTIVE ACTION I — UI AND REFERENCE IMAGE FIDELITY
+
+**Priority: P1 — Required release gate**
+
+The existing reference image is:
+
+`src/main.png`
+
+Treat this file as the visual baseline for the Home screen.
+
+The existing Home screen must be preserved and corrected to match this reference, not redesigned according to personal preference.
+
+#### 12.1 Visual inspection
+
+Inspect the actual image and the rendered application.
+
+Compare, at a consistent viewport:
+
+- Overall page structure
+- Header and navigation
+- Sidebar dimensions and placement
+- Content alignment
+- Grid and card structure
+- Spacing and padding
+- Typography hierarchy
+- Font sizes and weights
+- Backgrounds and surfaces
+- Borders, radii, and shadows
+- Icons
+- Labels and visible controls
+- Empty, loading, error, and populated states
+
+Do not claim pixel-level verification without actually comparing the reference and rendered output.
+
+If screenshot capture or visual comparison is unavailable in the current environment, report that specific limitation and provide a reproducible manual verification procedure.
+
+#### 12.2 Default dark theme
+
+The default application theme must be dark.
+
+A user-accessible theme switcher must remain inside the existing Settings menu.
+
+Do not add a separate prominent theme control to the Home screen if it is absent from the reference design.
+
+Both dark and light themes must be coherent and readable.
+
+Use centralized theme tokens or an equivalent consistent approach rather than scattered hardcoded color overrides.
+
+#### 12.3 Preserve the established Home screen
+
+Do not replace the approved Home screen with a generic analytics dashboard.
+
+Use the existing design and domain structure.
+
+Correct data wiring, localization, accessibility, and error states without unnecessarily changing the approved visual hierarchy.
+
+Synthetic demonstration records may be used, but they must be visibly distinguishable from verified operational data.
+
+#### 12.4 Responsive behavior
+
+Test the reference layout at the target desktop viewport and at narrower viewports.
+
+Preserve the primary desktop design while ensuring that navigation, forms, tables, and dialogs remain usable on smaller screens.
+
+Do not invent an approved viewport size if none is documented. Record the viewport used for testing.
+
+---
+
+### 13. CORRECTIVE ACTION J — COMPLETE ENGLISH/PERSIAN LOCALIZATION
+
+**Priority: P1 — Required release gate**
+
+The application must support English and Persian.
+
+Implement a centralized localization strategy for all user-visible text, including:
+
+- Navigation
+- Page titles
+- Buttons
+- Form labels
+- Placeholders
+- Validation errors
+- Empty states
+- Loading states
+- API error messages
+- Notifications
+- Dialogs
+- Tables
+- Statuses
+- Tooltips
+- Accessibility labels
+- Settings
+- Confirmation messages
+- Decision and feasibility explanations
+
+Do not translate only the main navigation while leaving dialogs or error messages in one language.
+
+#### English
+
+- Use left-to-right layout.
+- Preserve correct alignment, table structure, icons, and input behavior.
+
+#### Persian
+
+- Use right-to-left layout.
+- Ensure the application direction changes consistently across the page.
+- Correctly handle mixed Persian/English text, numbers, identifiers, dates, currency, and technical terms.
+- Ensure dialogs, navigation, tables, forms, and icons remain logically oriented.
+- Use suitable Persian typography without breaking the reference design.
+
+Use explicit locale resources and avoid scattered inline ternaries for translations.
+
+Do not translate database identifiers or internal API field names unless the user-visible specification explicitly requires it.
+
+Persist the user's language and theme preferences in the database when an authenticated user identity and persistence infrastructure are available. Otherwise, document the required persistence behavior and do not falsely claim it is durable.
+
+---
+
+### 14. CORRECTIVE ACTION K — GOOGLE AI STUDIO AND ENVIRONMENT BOUNDARIES
+
+**Priority: P1**
+
+The application is intended to be developed or operated in a Google AI Studio-related workflow, but do not assume that AI Studio automatically supplies a production database, authentication provider, durable backend, or deployment environment.
+
+Inspect the actual repository and execution environment.
+
+Document the boundaries between:
+
+- React/TypeScript UI
+- Application API
+- Domain services
+- Database access
+- Authentication and identity
+- Authorization
+- External integrations
+- AI-assisted analysis
+
+The UI must not connect directly to a privileged database.
+
+Do not embed database credentials in frontend code.
+
+Do not treat a model-generated response as authoritative business evidence.
+
+If AI features are present, preserve:
+
+- Input and source provenance
+- Model-generated versus human-authored distinctions
+- Relevant assumptions
+- Uncertainty and confidence where meaningful
+- Human review status
+- Applicable model or prompt version where necessary for reproducibility
+
+Do not invent a model provider, authentication provider, or deployment mechanism. Use existing approved integrations or identify the exact configuration decision required.
+
+---
+
+### 15. CORRECTIVE ACTION L — API CONTRACTS AND DATA CONSISTENCY
+
+**Priority: P0**
+
+Define and enforce consistent request and response contracts.
+
+For every endpoint, document:
+
+- Purpose
+- HTTP method and route
+- Request schema
+- Response schema
+- Authentication requirement
+- Authorization requirement
+- Validation rules
+- Error cases
+- Persistence behavior
+- Audit behavior
+- Idempotency behavior where relevant
+- Version/concurrency behavior where relevant
+
+Use shared TypeScript types and runtime validation at trust boundaries.
+
+Do not assume TypeScript types validate incoming JSON at runtime.
+
+Use a suitable schema-validation library already present in the repository, or introduce one only if needed and compatible with the project.
+
+Ensure that all screens presenting the same underlying business fact use the same authoritative source and compatible calculation.
+
+For example, a Home-screen decision alert and its detail page must not independently calculate conflicting decision status from separate hardcoded datasets.
+
+Use stable identifiers to connect summary widgets, detail views, and audit history.
+
+Where a screen shows a derived metric, document its source fields, calculation, observation time, and unknown-data behavior.
+
+Add cross-page consistency tests for important facts and statuses.
+
+---
+
+### 16. CORRECTIVE ACTION M — TESTING AND VALIDATION
+
+**Priority: P0 — Release blocking**
+
+Do not stop after compiling the application.
+
+Inspect the current test setup, then add or extend tests covering the following areas.
+
+#### 16.1 Build and static checks
+
+- TypeScript type checking
+- Production build
+- Linting, if configured
+- Dependency and configuration integrity
+- Migration validation
+
+Use the repository's actual scripts. Do not claim a command passed if it was not executed.
+
+#### 16.2 Persistence tests
+
+Verify that:
+
+- A created record survives API requests.
+- A record can be retrieved after server restart when using the configured durable database.
+- Updates persist correctly.
+- Failed writes are reported as failures.
+- No local fallback falsely reports success.
+- Seed operations do not overwrite production records.
+- Database transactions prevent partial consequential updates.
+- Duplicate retries do not create duplicate decisions or actions where idempotency is required.
+
+If a real database is unavailable, test against an appropriate disposable database or test double for what it can actually prove. Clearly distinguish simulated persistence tests from real database integration tests.
+
+#### 16.3 Lifecycle tests
+
+Verify that:
+
+- An issue cannot advance when required prerequisites are missing.
+- An issue without an accountable owner is blocked where ownership is mandatory.
+- Original intake remains preserved after enrichment.
+- Unauthorized transitions are rejected.
+- Invalid or stale updates are rejected.
+- Historical records remain available after supersession.
+
+#### 16.4 Feasibility and decision tests
+
+Verify that:
+
+- Hard constraints are checked before ranking.
+- A failed mandatory constraint prevents eligibility.
+- Unknown mandatory constraints do not count as passed.
+- No feasible candidate produces an explicit no-feasible-option state.
+- An AI recommendation is not recorded as a human decision.
+- Unauthorized users cannot record decisions.
+- Client-supplied actor names cannot override the authenticated identity.
+- Rejected alternatives and rationale are preserved.
+- The decision snapshot preserves the applicable profile and assessment versions.
+
+#### 16.5 Evidence and progress tests
+
+Verify that:
+
+- Unknown is not treated as zero.
+- Missing evidence is not treated as verified evidence.
+- Contradictory evidence is visible.
+- Stale evidence is not silently presented as current.
+- Progress cannot become verified solely because a percentage is supplied.
+- Missing tripartite evidence blocks verification.
+- Progress history remains available after subsequent observations.
+
+#### 16.6 Audit tests
+
+Verify that:
+
+- Consequential operations create durable audit records.
+- Failed transactions do not create misleading success records.
+- Historical decisions cannot be silently overwritten through ordinary application routes.
+- Actor, timestamp, target, and operation are recorded where required.
+- Unauthorized access and mutation attempts are handled consistently.
+
+#### 16.7 UI and localization tests
+
+Verify that:
+
+- Home screen matches `src/main.png` at the documented viewport.
+- Dark theme is the default.
+- Theme switching remains inside Settings.
+- English uses LTR layout.
+- Persian uses RTL layout.
+- All user-visible screens are localized.
+- Loading, empty, error, and success states are coherent.
+- Summary widgets and detail pages display consistent persisted data.
+- The application does not display synthetic records as verified live data.
+
+---
+
+### 17. CORRECTIVE ACTION N — DOCUMENTATION AND TRACEABILITY
+
+**Priority: P1**
+
+Update the actual repository documentation to reflect implemented behavior, not aspirational claims.
+
+At minimum, review and update:
+
+- `README.md`
+- `docs/GOOGLE_AI_STUDIO_BUILD_SPEC.md`
+- `docs/GOOGLE_AI_STUDIO_IMPLEMENTATION_PROMPT.md`
+
+Create or update additional documents as appropriate:
+
+- Architecture overview
+- Domain and lifecycle model
+- Database schema and migration guide
+- API contract reference
+- Authentication and authorization boundaries
+- Evidence and provenance model
+- Feasibility and decision rules
+- Progress verification requirements
+- Localization and visual regression procedure
+- Environment configuration
+- Deployment prerequisites
+- Backup, recovery, and retention requirements
+- Test and release report
+- Open business decisions register
+
+For every requirement, maintain traceability across:
+
+**Requirement → Domain rule → Schema → API/service → UI → Test → Evidence of verification**
+
+Do not mark a requirement implemented merely because it appears in documentation.
+
+Do not document a business rule as approved if it remains unresolved.
+
+---
+
+### 18. OPEN BUSINESS DECISIONS — BLOCK, DO NOT INVENT
+
+Search the repository for the answers to each question before reporting it as unresolved.
+
+If an answer is absent or ambiguous, record the exact blocker and implement a safe, fail-closed behavior where possible.
+
+#### B-01. Database provisioning
+
+Determine:
+
+- Which database is approved?
+- Where will it run?
+- Which connection mechanism and environment variables are required?
+- Who owns migrations, backup, recovery, and production access?
+
+Technical implementation may proceed against the approved repository architecture, but do not claim production persistence is operational without evidence.
+
+#### B-02. Authentication and identity
+
+Determine:
+
+- Which identity provider is approved?
+- How is an authenticated person mapped to an application user?
+- How are service accounts represented?
+- How are revoked or disabled identities handled?
+
+Do not fabricate identities or treat a display name as authentication.
+
+#### B-03. Authority and confidentiality
+
+Determine the approved role, object-access, confidentiality, and approval rules.
+
+Until the rules are defined, enforce a restrictive default for sensitive or consequential operations and identify which operations remain disabled.
+
+Do not invent an organization-wide authority matrix.
+
+#### B-04. Tripartite progress evidence
+
+Identify the exact three required evidence components, their issuers, validation methods, and relationship to progress verification.
+
+If the repository does not define them, explicitly request the missing definition from the authorized product owner. Do not invent the three components.
+
+#### B-05. Feasibility constraints and escalation
+
+Identify approved hard constraints, their data sources, evaluation rules, exception authority, and escalation procedure.
+
+Do not invent feasibility thresholds or escalation recipients.
+
+#### B-06. Decision-profile calculations
+
+Identify the approved profile weights, qualification thresholds, aggregation formula, and treatment of missing or conflicting inputs.
+
+If they are undefined, implement versionable configuration and mark the calculation as not approved for consequential production use.
+
+#### B-07. Progress and outcome calculations
+
+Identify the approved baseline, units, currency, period, formula, tolerance, and evidence rules for progress and outcome metrics.
+
+Do not invent them.
+
+#### B-08. Visual acceptance criteria
+
+Use `src/main.png` as the reference. Determine the available screenshot environment and record the tested viewport.
+
+Do not claim pixel-level acceptance without an actual comparison.
+
+#### B-09. Operational resilience
+
+Determine required retention, backup, restoration, audit access, recovery point objective, recovery time objective, and incident-handling rules.
+
+Do not invent service-level commitments.
+
+Maintain a blocker register containing:
+
+- Blocker ID
+- Missing decision
+- Why it matters
+- Affected feature
+- Safe behavior until resolved
+- Responsible decision owner, if established
+- Evidence needed to close it
+
+Do not assign a named owner or deadline without evidence.
+
+---
+
+### 19. REQUIRED IMPLEMENTATION SEQUENCE
+
+Execute in this order, adapting only where repository dependencies require it.
+
+**Phase 0 — Baseline and inventory**
+
+- Inspect the repository and current requirements.
+- Map existing routes, components, models, and data flows.
+- Identify all in-memory persistence and fallback mutation paths.
+- Record current build/test status.
+- Preserve a baseline before changes.
+
+**Phase 1 — Canonical domain and persistence design**
+
+- Normalize existing domain concepts.
+- Define database schema and migrations.
+- Define persistent identifiers and relationships.
+- Establish transaction and concurrency patterns.
+- Separate synthetic seed data from operational records.
+
+**Phase 2 — Server-side domain enforcement**
+
+- Implement lifecycle transitions.
+- Implement ownership checks.
+- Implement evidence and uncertainty semantics.
+- Implement feasibility gating.
+- Implement decision recording.
+- Implement audit events and history preservation.
+- Add authorization enforcement points.
+
+**Phase 3 — Frontend persistence integration**
+
+- Remove false-success fallbacks.
+- Connect mutations to authoritative APIs.
+- Render persisted state.
+- Add clear pending, success, failure, blocked, unknown, and stale states.
+- Ensure Home and detail pages use consistent data.
+
+**Phase 4 — Progress and outcomes**
+
+- Implement only the approved progress-evidence model.
+- Block verification if mandatory evidence is undefined or incomplete.
+- Preserve baselines and observations.
+- Implement outcome and learning records without inventing formulas.
+
+**Phase 5 — Visual and localization correction**
+
+- Compare Home with `src/main.png`.
+- Preserve default dark theme and Settings-based switching.
+- Validate English LTR and Persian RTL.
+- Test the target desktop viewport and narrower layouts.
+
+**Phase 6 — Testing and documentation**
+
+- Execute build, type checks, and available tests.
+- Add persistence, lifecycle, feasibility, authorization, audit, progress, and localization tests.
+- Update requirements and implementation documents.
+- Produce a requirement-to-test traceability matrix.
+
+**Phase 7 — Final compliance audit**
+
+- Reinspect changed files.
+- Search again for prohibited in-memory business persistence and false-success fallbacks.
+- Verify that documentation matches code.
+- Report remaining blockers and unverified items.
+- Do not declare full compliance while a P0 requirement is unimplemented or unverified.
+
+---
+
+### 20. REQUIRED DELIVERABLES
+
+Produce the following deliverables through actual repository changes where possible.
+
+#### D-01. Corrected application
+
+The existing application with the necessary code changes implemented, not just proposed.
+
+#### D-02. Database schema and migrations
+
+Versioned schema and migration artifacts, plus configuration documentation.
+
+#### D-03. Corrected domain services and APIs
+
+Server-side validation, lifecycle enforcement, feasibility gating, durable decisions, and audit behavior.
+
+#### D-04. Corrected frontend
+
+No false-success local fallback for business mutations; consistent persisted data; clear error and blocked states; approved Home design; dark default; English/Persian support.
+
+#### D-05. Automated tests
+
+Tests that exercise the implemented requirements and critical failure paths.
+
+#### D-06. Updated documentation
+
+Architecture, build, environment, database, API, localization, testing, and deployment documentation.
+
+#### D-07. Compliance matrix
+
+For every requirement, report:
+
+- Requirement ID
+- Requirement
+- Implementation status
+- Changed files
+- Test or verification method
+- Actual result
+- Remaining limitation
+
+Use only these status values:
+
+- `PASS` — implemented and verified with evidence
+- `FAIL` — known defect or unmet requirement
+- `PARTIAL` — implemented incompletely
+- `BLOCKED` — requires an unresolved decision or dependency
+- `NOT VERIFIED` — verification could not be performed
+
+#### D-08. Open blocker register
+
+List all unresolved business and infrastructure decisions, with their consequences and safe interim behavior.
+
+#### D-09. Final change report
+
+List:
+
+- Files created
+- Files modified
+- Files removed
+- Schema and migration changes
+- API changes
+- UI changes
+- Tests added
+- Commands executed
+- Test/build results
+- Database verification status
+- Visual verification status
+- Remaining risks
+
+---
+
+### 21. DEFINITION OF DONE
+
+The corrective action is complete only when all applicable conditions below are demonstrated.
+
+1. No server-process memory or browser state is the authoritative persistence mechanism for business records.
+2. Business mutations are confirmed by durable server-side writes.
+3. Failed API/database operations cannot masquerade as successful business changes.
+4. Runtime business state is not silently recreated from static initial data.
+5. The issue lifecycle is enforced server-side.
+6. Original intake and consequential changes remain traceable.
+7. Evidence provenance, uncertainty, contradictions, and freshness are represented honestly.
+8. Unknown values are not silently treated as zero, healthy, or feasible.
+9. Mandatory feasibility constraints are evaluated before candidate ranking.
+10. No feasible option produces an explicit blocked/escalation state rather than a fabricated winner.
+11. Human decisions remain distinct from AI recommendations.
+12. Rejected alternatives, rationale, decision snapshots, and relevant parameter versions are preserved.
+13. Progress cannot be presented as verified without the required approved evidence.
+14. Audit history is durably recorded and protected against ordinary silent mutation.
+15. Identity and authorization are enforced at server-side trust boundaries.
+16. Home-screen visual acceptance is tested against `src/main.png`.
+17. Dark is the default theme and switching remains in Settings.
+18. English LTR and Persian RTL work consistently across the application.
+19. API, database, and UI data remain consistent.
+20. Relevant automated tests have been executed and their actual results reported.
+21. Documentation accurately reflects the implementation.
+22. All unresolved business decisions are explicitly identified.
+23. No unverified deployment, database, security, or test result is presented as successful.
+
+If a condition cannot be fully met because an external service, database, identity provider, business decision, or visual testing environment is unavailable, implement the safe portion, document the dependency, mark the condition `BLOCKED` or `NOT VERIFIED`, and state exactly what is needed to close it.
+
+**Never convert a blocker into a PASS by changing the wording of the requirement.**
+
+---
+
+### 22. FINAL RESPONSE FORMAT
+
+After implementing the corrections, return the results in this exact structure:
+
+#### 1. Executive status
+
+Provide a concise overall verdict and a table of the critical requirements with their actual statuses.
+
+#### 2. Changes actually implemented
+
+List the substantive changes and the files involved. Distinguish code committed or written from recommendations that remain unimplemented.
+
+#### 3. Persistence and database verification
+
+State the database technology implemented, migration status, connection status, tests actually run, and what remains unverified.
+
+#### 4. Lifecycle, evidence, feasibility, and decision controls
+
+Explain which controls are implemented and tested, and which depend on unresolved business definitions.
+
+#### 5. UI and localization verification
+
+Report the actual comparison against `src/main.png`, tested viewport, dark-theme behavior, and English/Persian RTL/LTR results.
+
+#### 6. Test and build results
+
+List commands executed and their actual outcomes. Never fabricate successful test output.
+
+#### 7. Open blockers
+
+List every remaining blocker, its impact, safe interim behavior, and the specific decision or infrastructure needed.
+
+#### 8. Requirement-to-test matrix
+
+Provide traceability from each critical requirement to implementation files and verification evidence.
+
+#### 9. Residual risks
+
+Identify any remaining security, data-integrity, migration, concurrency, operational, or product risks.
+
+#### 10. Final compliance verdict
+
+Choose one:
+
+- `PASS — all mandatory requirements implemented and verified`
+- `FAIL — mandatory requirements remain unmet`
+- `BLOCKED — implementation or verification depends on unresolved prerequisites`
+
+Do not issue `PASS` if any mandatory P0 requirement remains unimplemented or unverified.
+
+---
+
+### FINAL EXECUTION INSTRUCTION
+
+Start by inspecting the complete current repository and its actual requirements.
+
+Then implement the corrective actions in the repository. Do not stop at analysis. Do not ask the user to supply information already available in the repository. Do not invent missing business definitions. Do not claim success without evidence.
+
+Where safe implementation is possible, proceed immediately. Where an unresolved business decision prevents safe final behavior, build the necessary technical structure, fail closed, and record the exact blocker.
+
+**The objective is a verifiably trustworthy enterprise decision-control system—not a convincing demo that only appears to work.**

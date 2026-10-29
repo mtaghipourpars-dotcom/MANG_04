@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 import { ExecutiveKpiCards } from './components/ExecutiveKpiCards';
@@ -8,6 +8,7 @@ import { UrgentDecisionsList } from './components/UrgentDecisionsList';
 import { ProjectsTable } from './components/ProjectsTable';
 import { TimelineDevelopments } from './components/TimelineDevelopments';
 import { DecisionModal } from './components/DecisionModal';
+import { TripartiteVerificationModal } from './components/TripartiteVerificationModal';
 import { ProjectsView } from './components/ProjectsView';
 import { DecisionsView } from './components/DecisionsView';
 import { RiskMapView } from './components/RiskMapView';
@@ -15,28 +16,25 @@ import { ReportsView } from './components/ReportsView';
 import { KnowledgeView } from './components/KnowledgeView';
 import { SettingsModal } from './components/SettingsModal';
 import { Project, DecisionCase, ProductDomain, TimelineEvent, AuditLog } from './types';
-import {
-  INITIAL_PROJECTS,
-  INITIAL_DECISION_CASES,
-  INITIAL_PRODUCT_DOMAINS,
-  INITIAL_TIMELINE_EVENTS,
-  INITIAL_AUDIT_LOGS,
-} from './data';
-import { X, Cpu, Calendar, User, ShieldAlert, Check } from 'lucide-react';
+import { X, Cpu, ShieldAlert, AlertTriangle } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('home');
   const [lang, setLang] = useState<'fa' | 'en'>('fa');
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
-  const [projects, setProjects] = useState<Project[]>(INITIAL_PROJECTS);
-  const [decisions, setDecisions] = useState<DecisionCase[]>(INITIAL_DECISION_CASES);
-  const [domains, setDomains] = useState<ProductDomain[]>(INITIAL_PRODUCT_DOMAINS);
-  const [timeline, setTimeline] = useState<TimelineEvent[]>(INITIAL_TIMELINE_EVENTS);
-  const [auditLogs, setAuditLogs] = useState<AuditLog[]>(INITIAL_AUDIT_LOGS);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [decisions, setDecisions] = useState<DecisionCase[]>([]);
+  const [domains, setDomains] = useState<ProductDomain[]>([]);
+  const [timeline, setTimeline] = useState<TimelineEvent[]>([]);
+  const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [serverError, setServerError] = useState<string | null>(null);
 
   const [selectedDecisionModal, setSelectedDecisionModal] = useState<DecisionCase | null>(null);
   const [selectedProjectDetail, setSelectedProjectDetail] = useState<Project | null>(null);
+  const [tripartiteProject, setTripartiteProject] = useState<Project | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
 
   // Sync html dir and theme
@@ -52,96 +50,123 @@ export default function App() {
     }
   }, [lang, theme]);
 
-  // Fetch server data on mount
+  // Authoritative fetch from database
+  const refreshDatabaseState = useCallback(async () => {
+    setIsLoading(true);
+    setServerError(null);
+    try {
+      const [resProj, resDec, resDom, resTime, resAudit] = await Promise.all([
+        fetch('/api/projects').then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status} fetching projects`);
+          return r.json();
+        }),
+        fetch('/api/decisions').then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status} fetching decisions`);
+          return r.json();
+        }),
+        fetch('/api/domains').then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status} fetching domains`);
+          return r.json();
+        }),
+        fetch('/api/timeline').then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status} fetching timeline`);
+          return r.json();
+        }),
+        fetch('/api/audit').then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status} fetching audit`);
+          return r.json();
+        }),
+      ]);
+
+      if (resProj?.success && resProj.data) setProjects(resProj.data);
+      if (resDec?.success && resDec.data) setDecisions(resDec.data);
+      if (resDom?.success && resDom.data) setDomains(resDom.data);
+      if (resTime?.success && resTime.data) setTimeline(resTime.data);
+      if (resAudit?.success && resAudit.data) setAuditLogs(resAudit.data);
+    } catch (err: any) {
+      console.error('[Zero-Trust Audit] Database Connection Error:', err);
+      setServerError(
+        lang === 'fa'
+          ? `خطا در ارتباط با سرور و پایگاه داده: ${err.message}. بر اساس خط‌مشی عدم حدس، از داده‌های کاذب محلی استفاده نشد.`
+          : `Database connection error: ${err.message}. Per Zero-Trust policy, no local mock data was substituted.`
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  }, [lang]);
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [resProj, resDec, resDom, resTime, resAudit] = await Promise.all([
-          fetch('/api/projects').then((r) => r.json()),
-          fetch('/api/decisions').then((r) => r.json()),
-          fetch('/api/domains').then((r) => r.json()),
-          fetch('/api/timeline').then((r) => r.json()),
-          fetch('/api/audit').then((r) => r.json()),
-        ]);
+    refreshDatabaseState();
+  }, [refreshDatabaseState]);
 
-        if (resProj?.success && resProj.data) setProjects(resProj.data);
-        if (resDec?.success && resDec.data) setDecisions(resDec.data);
-        if (resDom?.success && resDom.data) setDomains(resDom.data);
-        if (resTime?.success && resTime.data) setTimeline(resTime.data);
-        if (resAudit?.success && resAudit.data) setAuditLogs(resAudit.data);
-      } catch (err) {
-        console.warn('Backend API connection offline, using in-memory state fallback:', err);
-      }
-    };
-    fetchData();
-  }, []);
-
-  // Handle Recording Decision
+  // Handle Recording Decision (Zero-Trust: No Local Fallback on failure!)
   const handleRecordDecision = async (
     decisionId: string,
     candidateId: string,
-    rationale: string
+    rationale: string,
+    authorityBasis: string
   ) => {
-    try {
-      const res = await fetch(`/api/decisions/${decisionId}/record`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          selectedCandidateId: candidateId,
-          decisionRationale: rationale,
-          decisionMaker: 'مدیرعامل / CEO',
-        }),
-      });
-      const data = await res.json();
-      if (data?.success && data.data) {
-        setDecisions((prev) =>
-          prev.map((d) => (d.id === decisionId ? data.data : d))
-        );
-      } else {
-        // Fallback update
-        setDecisions((prev) =>
-          prev.map((d) =>
-            d.id === decisionId
-              ? {
-                  ...d,
-                  selectedCandidateId: candidateId,
-                  decisionRationale: rationale,
-                  decidedAt: new Date().toISOString(),
-                }
-              : d
-          )
-        );
-      }
+    const res = await fetch(`/api/decisions/${decisionId}/record`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-user-id': 'usr-ceo-01',
+        'x-user-role': 'مدیرعامل / Chief Executive Officer',
+      },
+      body: JSON.stringify({
+        selectedCandidateId: candidateId,
+        decisionRationale: rationale,
+        authorityBasis,
+      }),
+    });
 
-      // Add audit log
-      setAuditLogs((prev) => [
-        {
-          id: `log-${Date.now()}`,
-          action: 'HUMAN_DECISION_RECORDED',
-          entityId: decisionId,
-          actor: 'مدیرعامل / CEO',
-          timestamp: new Date().toISOString(),
-          details: `Selected candidate ${candidateId}. Rationale: ${rationale}`,
-        },
-        ...prev,
-      ]);
-    } catch (err) {
-      console.error(err);
+    const data = await res.json();
+    if (!res.ok || !data?.success) {
+      throw new Error(data?.error || `Server rejected decision with status ${res.status}`);
     }
+
+    // Revalidate authoritative persisted records from database
+    await refreshDatabaseState();
+  };
+
+  // Handle Tripartite Progress Verification
+  const handleTripartiteVerify = async (payload: {
+    projectId: string;
+    claimedPercentage: number;
+    warehouseDocNumber: string;
+    warehouseVerified: boolean;
+    machineTelemetryId: string;
+    telemetryVerified: boolean;
+    supervisorBadgeId: string;
+    supervisorSignoffVerified: boolean;
+    notes?: string;
+  }) => {
+    const res = await fetch(`/api/projects/${payload.projectId}/tripartite-verify`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-user-id': 'usr-qc-auditor',
+        'x-user-role': 'سرپرست ممیزی کیفیت و کارگاه',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data?.success) {
+      throw new Error(data?.error || `Server verification failed with status ${res.status}`);
+    }
+
+    // Revalidate authoritative database state
+    await refreshDatabaseState();
   };
 
   // Reset Data to initial state
   const handleResetData = async () => {
-    try {
-      await fetch('/api/reset', { method: 'POST' });
-    } catch (e) {
-      console.warn('API reset offline:', e);
+    const res = await fetch('/api/reset', { method: 'POST' });
+    if (!res.ok) {
+      throw new Error('Database reset failed');
     }
-    setProjects(INITIAL_PROJECTS);
-    setDecisions(INITIAL_DECISION_CASES);
-    setDomains(INITIAL_PRODUCT_DOMAINS);
-    setTimeline(INITIAL_TIMELINE_EVENTS);
-    setAuditLogs(INITIAL_AUDIT_LOGS);
+    await refreshDatabaseState();
     setIsSettingsOpen(false);
   };
 
@@ -153,6 +178,22 @@ export default function App() {
         onOpenSettings={() => setIsSettingsOpen(true)}
         auditCount={auditLogs.length}
       />
+
+      {/* Global Server Error Banner */}
+      {serverError && (
+        <div className="bg-red-900/80 border-b border-red-500 text-white px-6 py-2.5 text-xs font-bold flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 text-red-300" />
+            <span>{serverError}</span>
+          </div>
+          <button
+            onClick={() => refreshDatabaseState()}
+            className="px-3 py-1 bg-red-700 hover:bg-red-600 rounded text-[11px]"
+          >
+            تلاش مجدد (Retry)
+          </button>
+        </div>
+      )}
 
       {/* Main Body */}
       <div className="flex-1 flex overflow-hidden">
@@ -166,7 +207,7 @@ export default function App() {
 
         {/* Content Area */}
         <main className="flex-1 p-4 md:p-6 overflow-y-auto max-w-[1600px] mx-auto w-full">
-          {/* Executive KPI Cards (Row 1 across all pages or Home) */}
+          {/* Executive KPI Cards */}
           <ExecutiveKpiCards
             lang={lang}
             onCardClick={(type) => {
@@ -222,6 +263,7 @@ export default function App() {
                     lang={lang}
                     onViewAll={() => setActiveTab('projects')}
                     onSelectProject={(p) => setSelectedProjectDetail(p)}
+                    onOpenTripartiteModal={(p) => setTripartiteProject(p)}
                   />
                 </div>
 
@@ -283,6 +325,14 @@ export default function App() {
         onRecordDecision={handleRecordDecision}
       />
 
+      {/* Tripartite Shop-Floor Verification Modal */}
+      <TripartiteVerificationModal
+        project={tripartiteProject}
+        lang={lang}
+        onClose={() => setTripartiteProject(null)}
+        onVerify={handleTripartiteVerify}
+      />
+
       {/* Project Detail Modal */}
       {selectedProjectDetail && (
         <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
@@ -325,22 +375,38 @@ export default function App() {
                 <span className="text-slate-400">{lang === 'fa' ? 'زمان تا نقطه مرز:' : 'Days to No-Return:'}</span>
                 <span className="font-bold text-amber-400">{selectedProjectDetail.timeToNoReturnDays} {lang === 'fa' ? 'روز' : 'days'}</span>
               </div>
+              <div className="flex justify-between">
+                <span className="text-slate-400">{lang === 'fa' ? 'وضعیت راستی‌آزمایی پیشرفت:' : 'Proof Status:'}</span>
+                <span className="font-bold text-amber-400">{(selectedProjectDetail as any).progressVerificationStatus || 'UNVERIFIED'}</span>
+              </div>
             </div>
 
-            <button
-              onClick={() => {
-                const dec = decisions.find((d) => d.projectCode === selectedProjectDetail.code);
-                setSelectedProjectDetail(null);
-                if (dec) {
-                  setSelectedDecisionModal(dec);
-                } else {
-                  setActiveTab('decisions');
-                }
-              }}
-              className="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-black text-xs rounded-xl transition-colors"
-            >
-              {lang === 'fa' ? 'مشاهده / ارزیابی پرونده تصمیم این پروژه' : 'Open Decision Case'}
-            </button>
+            <div className="grid grid-cols-2 gap-2 pt-2">
+              <button
+                onClick={() => {
+                  setTripartiteProject(selectedProjectDetail);
+                  setSelectedProjectDetail(null);
+                }}
+                className="py-2.5 bg-amber-600/20 border border-amber-500/40 hover:bg-amber-600/30 text-amber-300 font-bold text-xs rounded-xl transition-colors"
+              >
+                {lang === 'fa' ? 'ممیزی شواهد سه‌گانه پیشرفت' : 'Tripartite Progress Audit'}
+              </button>
+
+              <button
+                onClick={() => {
+                  const dec = decisions.find((d) => d.projectCode === selectedProjectDetail.code);
+                  setSelectedProjectDetail(null);
+                  if (dec) {
+                    setSelectedDecisionModal(dec);
+                  } else {
+                    setActiveTab('decisions');
+                  }
+                }}
+                className="py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-black text-xs rounded-xl transition-colors"
+              >
+                {lang === 'fa' ? 'ارزیابی پرونده تصمیم' : 'Open Decision Case'}
+              </button>
+            </div>
           </div>
         </div>
       )}

@@ -26,7 +26,8 @@ export interface DecisionCandidate {
   costImpactM: number;
   scheduleImpactDays: number;
   customerSatisfactionScore: number; // 1-5
-  feasibilityStatus: 'feasible' | 'conditional' | 'infeasible';
+  feasibilityStatus: 'FEASIBLE' | 'PARTIALLY_FEASIBLE' | 'NOT_FEASIBLE' | 'INSUFFICIENT_EVIDENCE' | 'feasible' | 'conditional' | 'infeasible';
+  isEligibleForRanking?: boolean;
   pros: string[];
   prosEn: string[];
   cons: string[];
