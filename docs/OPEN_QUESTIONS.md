@@ -1,38 +1,43 @@
-# Open Questions — Only Decisions That Need Product-Owner Input
+# Open Items and Evidence-Gated Dependencies
 
-Do not re-ask foundational principles already marked AGREED in DECISION_REGISTER.md. Research source documents and propose an answer before asking the product owner.
+This file is not a questionnaire. Foundational questions have been answered from MANG_03, newmodel1 and MANG_01 where those repositories support an answer. Remaining items are implementation/data dependencies and must not be used to reopen settled principles.
 
-## O-001 — MVP issue types and minimum fields
-**Working approach:** Reuse the existing MANG_03 issue-type catalog and qualification rules as the starting baseline. Identify only those types needed to demonstrate the first end-to-end MVP case. Avoid asking for financial effects at initial registration unless the issue type genuinely requires it.
+## Resolved from source repositories
 
-**Question for owner:** Which issue type(s) should be the first fully demonstrated MVP path? This should be asked only after inspecting the current source catalog and demo case.
+- **First demonstrable case:** use the industrial critical-component / supplier-delay scenario to trace issue → affected commitment/project → solution candidates → feasibility → human decision → actions → observed outcome. MANG_01's three-project/one-family scenario is a candidate fixture pattern, but real project IDs are not supplied. Use synthetic labels until approved real data is available.
+- **Core issue model:** use MANG_03's intake + transparent qualification gate + formal case model and enterprise issue/solution catalogue. Preserve unmatched intakes for manual classification; catalogue authoring stays disabled in MVP.
+- **Routing:** local/global scope and delegated authority are separate. Escalate when the decision exceeds delegated authority; do not invent a numeric score threshold. Use configured authority and transparent manual review until approved thresholds exist.
+- **Evidence gates:** preserve the intake even when evidence is weak. A deficiency may block a specific claim, link, feasibility conclusion or decision, but does not silently delete the issue. Contradictory/old/unknown evidence is visible and routed for review.
+- **Financial analysis:** manager-owned qualitative 1–5 assessment first, with defined scale anchors and explicit UNKNOWN/NOT_ASSESSED. Quantified financial impact only when source, method, period, currency, assumptions, confidence and approval are defensible. No financial estimate is required in initial intake.
+- **Shared resource for pilot:** the industrial critical-component / supplier-delay case is the best grounded source scenario. The model should also show the shared-resource competition where data supports it; if actual time-phased data is unavailable, label the scenario DEMO_SYNTHETIC and do not claim a real optimal allocation.
+- **Learning:** historical outcomes and manager-controlled profile changes first. Recommendation, approval and activation remain separate; automatic profile changes are outside MVP.
+- **Repository ownership:** MANG_03 owns generic issue/solution/decision-learning concepts; newmodel1 owns PVPT industrial/product/project/resource domain; MANG_01 owns the input-governance pattern. MANG_04 currently owns the consolidated product/architecture baseline; full code migration is not implied.
 
-## O-002 — LOCAL/GLOBAL routing thresholds
-**Working approach:** Keep issue scope score and delegated authority as separate concepts. A score may signal cross-functional significance; escalation is required when the decision exceeds the current level's authority.
+## Open dependencies (do not ask user again unless a specific implementation blocker requires an approval)
 
-**Question for owner:** Which specific score thresholds or conditions should be authoritative in MVP, if they are not already defined in MANG_03?
+### DATA-01 — Real pilot data
+Needed: authoritative product and project/WBS IDs, product-project assignments, BOM/component/Cell, commitment/milestone, resource/capacity periods, supplier dates, source owner, as-of date and permission to use. Until supplied by an accountable source, use only clearly labelled synthetic fixtures.
 
-## O-003 — Evidence quality gates
-**Working approach:** Define status labels, required evidence by issue type, and explicit consequences for missing/contradictory evidence. A gate may block a specific conclusion or lower confidence without necessarily preventing issue registration.
+### GOV-01 — Authority and review ownership
+Needed: real roles and object-level permissions, delegated decision authority, qualification exception reviewer, data approvers and emergency-action authority. Until approved, no privilege or approval right is inferred.
 
-**Question for owner:** Only if the source rules do not decide it: which evidence deficiencies must block solution comparison versus merely display a warning?
+### MODEL-01 — Profile and assessment policy
+Needed: final scale anchors, parameter directions, profile aggregation/missing-data policy, materiality thresholds and refinement triggers. Existing 1–5 anchors and equal-weight baseline are proposals, not approved universal rules. Do not sum ordinal values into money.
 
-## O-004 — MVP quantitative financial outputs
-**Working approach:** Prefer qualitative, evidence-linked impacts where financial formulas or trusted inputs are unavailable. Never imply precision without method and data.
+### FIN-01 — Quantified finance
+Needed: authoritative fields, formula/method, currency, unit, period, forecast horizon, treatment of overlapping impacts and approval process. Until then show NOT YET QUANTIFIED / INTERNAL SOURCE REQUIRED.
 
-**Question for owner:** Are there any financial measures that must be quantitatively calculated in MVP rather than displayed as a qualified estimate?
+### INPUT-01 — Data-entry matrix
+Needed: approved per-field owner, submitter, approver, frequency, deadline, authoritative source, late-data policy and correction policy. MANG_01 provides the matrix schema; it does not provide approved assignments. Draft rows must not create real tasks.
 
-## O-005 — Shared-resource trade-offs
-**Working approach:** Demonstrate the trade-off explicitly, even if qualitative. Do not call a solution globally optimal unless resource constraints and alternatives have been sufficiently modeled.
+### TECH-01 — Runtime and operations
+Needed: inspect actual code stack; verify PostgreSQL provisioning, identity, self-hosting, secrets, migrations, authorization, audit, backup/restore, retention and rollback. The architecture is a target contract, not proof of implementation.
 
-**Question for owner:** Which shared resource should anchor the first demonstrable cross-issue competition case: liquidity/cash, a critical part, machine capacity, or another resource? Ask only if the existing demo/reference scenario does not already establish this.
+### TEST-01 — Acceptance evidence
+Needed: same-viewport screenshot comparison against newmodel1/demo/main.png for PVPT visuals; run relevant browser tests; verify durable persistence, object-level authorization, cross-page data consistency, failure states, concurrency, recovery and source adapter contracts. Mark unsupported checks BLOCKED/NOT RUN.
 
-## O-006 — Learned profile changes
-**Working approach:** For early versions, record historical evidence/outcomes and support manager-controlled profile changes. Later versions may recommend new weights; recommendation, approval, activation, and historical versioning remain separate.
+### OUTCOME-01 — Outcome/value review
+Needed: owner for actual observations and a review process for baseline/alternative explanations/causal attribution. Until then, retain outcome-not-yet-available and attribution-unknown states.
 
-**Question for owner:** No MVP question required unless learned profile changes are proposed for MVP scope.
-
-## O-007 — Cross-repository ownership
-**Working approach:** MANG_03 owns generic issue/solution/decision-learning concepts; newmodel1 owns PVPT industrial domain concepts; MANG_01 provides input governance and analytical provenance patterns. Do not duplicate authoritative objects without a declared source of truth.
-
-**Question for owner:** Before implementation merge, confirm whether MANG_04 is intended to remain a consolidated product/architecture repository or become the primary executable repository. This affects migration strategy, not the product's foundational principles.
+## Execution rule
+Continue implementation and documentation wherever these dependencies do not block it. Do not invent real data, approval policy, formulas, numeric thresholds, or production readiness to make a screen look complete.
