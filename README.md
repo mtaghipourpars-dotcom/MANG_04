@@ -45,3 +45,11 @@ Demonstrate one traceable issue-to-outcome case with intake and qualification, e
 
 ## Repository governance
 MANG_04 is currently the consolidated product/architecture baseline. Source-specific technical details remain in source repositories until deliberately migrated and validated. Do not overwrite unresolved dependencies with guesses. Record foundational changes with rationale, scope and effective version.
+
+
+## Google AI Studio MVP implementation
+- [Google AI Studio Build Specification](docs/GOOGLE_AI_STUDIO_BUILD_SPEC.md) — implementation workflow, persistence rules and release gates.
+- [Google AI Studio Implementation Prompt](docs/GOOGLE_AI_STUDIO_IMPLEMENTATION_PROMPT.md) — controlled build prompt.
+- [Database Schema Template](docs/GOOGLE_AI_STUDIO_DATABASE_SCHEMA_TEMPLATE.md) — approval-gated domain schema inventory.
+
+**Blocking prerequisites:** attach the exact `MAIN.PNG` reference image to the AI Studio project and verify/configure the intended database environment. The implementation contract prohibits guessing either the screen or the database product. No application deployment or database provisioning is claimed by this documentation commit.
