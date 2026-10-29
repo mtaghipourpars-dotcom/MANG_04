@@ -1,6 +1,6 @@
 # Google AI Studio — Controlled Implementation Prompt
 
-Build the MANG MVP as a database-backed web application, following the approved MANG_04 contracts and the attached exact reference image `MAIN.PNG`.
+Build the MANG MVP as a database-backed web application, following the approved MANG_04 contracts and the exact reference image at `src/main.png` (https://github.com/mtaghipourpars-dotcom/MANG_04/blob/main/src/main.png).
 
 ## Mandatory source inspection
 Read these project documents first:
