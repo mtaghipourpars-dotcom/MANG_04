@@ -1,6 +1,6 @@
 # Google AI Studio Build Specification — MANG MVP
 
-**Status:** Implementation contract prepared; UI fidelity and production acceptance BLOCKED until the exact reference image and an authorized deployable database environment are available.
+**Status:** Reference asset located at [`src/main.png`](../src/main.png). Visual implementation must use this exact image. Production acceptance remains BLOCKED until a deployable database/auth environment is configured and tested.
 
 ## 1. Source-of-truth precedence
 1. The actual supplied `MAIN.PNG` image and any explicit annotations attached to it.
@@ -8,12 +8,18 @@
 3. This build contract.
 4. No inferred UI elements, field meanings, thresholds, data, formulas, roles, or workflows may be added to close a gap. Stop and record a blocking ambiguity instead.
 
-**Current blocker:** `MAIN.PNG` was not found at the root of MANG_04 or among the currently available repository files. The exact image is therefore not inspectable from this repository state. Do not recreate it from memory or from a textual summary. The five executive cards and two primary views recorded in collaboration context are not sufficient to claim pixel-exact fidelity for the entire screen.
+**Reference asset:** [`src/main.png`](../src/main.png) (GitHub path: `src/main.png`). The repository connector can confirm the asset exists but cannot decode this binary image for visual inspection. The build environment must load and inspect the image directly before implementation; do not recreate it from memory or a textual summary. The five executive cards and two primary views recorded in collaboration context are not sufficient to claim pixel-exact fidelity for the entire screen.
+
+## 1.1 Explicit user UI requirements
+- Home page and full UI must match `src/main.png` exactly in layout, structure, components and behavior. Do not add, remove, reorder or restructure elements beyond the reference.
+- Populate existing data slots with fresh, clearly synthetic demo content; do not copy the reference's data values or present synthetic values as live facts.
+- Default theme is Dark. The existing Settings menu must allow switching theme. Do not add a new Settings entry or control unless it is present in the reference image; place the theme control within the depicted Settings surface.
+- The application is bilingual: English and Persian (Farsi). Preserve the same UI structure in both languages. Persian uses correct RTL layout and typography; English uses LTR. Language switching must not create duplicate or additional UI elements absent from the reference.
 
 ## 2. Google AI Studio workflow
 Use Google AI Studio Build mode to generate and preview the web client, with the following controlled sequence:
 1. Import the MANG_04 repository/specification into the project context.
-2. Attach the exact `MAIN.PNG` reference asset to the AI Studio project.
+2. Load the exact repository asset `src/main.png` (https://github.com/mtaghipourpars-dotcom/MANG_04/blob/main/src/main.png) into the AI Studio project and inspect it visually.
 3. Generate the application shell and compare the rendered screenshot to the supplied image at the same viewport and device scale.
 4. Implement persistence behind a typed repository/data-access layer; no UI component may directly invent or locally persist business records.
 5. Configure the actual database and authentication in the project environment. Use only the selected, provisioned database product and its documented SDK. Do not silently choose Firebase, PostgreSQL, or another database without an approved environment decision.
